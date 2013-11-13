@@ -1,0 +1,48 @@
+{% load adsman_tags %}
+<!--
+<div>Торговая площадка</div>
+-->
+<link rel="stylesheet" type="text/css" href="/site_media/css/base_fix.css" media="screen" />
+<div  style="background-color:#E6E6E6; width:144px;">
+<table style="font-family: Arial, sans-serif; font-size: 0.9em;">
+ {% for post in avia %}
+  <tr> <td>
+   {{post.active_date|date:"d.m.y"}}
+   <!--{{post.active_date.day}}.{{post.active_date.month}}.{{post.active_date.year}} -->
+   <b>{% ads_post_attr "avia_route_2" post %}</b> <br>
+   a/б - <font color="#FF0000">{{post.price}} {{post.currency}} </font> <br>
+   <a href="/company/{{post.author.id}}/ " target="top">"{{post.author.name}}"</a>
+
+  </td> </tr> 
+ {% endfor %}
+</table>
+<hr>
+<table style="font-family: Arial, sans-serif; font-size: 0.9em;">
+ {% for post in foreign %}
+  <tr> <td>
+   {{post.active_date|date:"d.m.y"}}
+   <!--{{post.active_date.day}}.{{post.active_date.month}}.{{post.active_date.year}} -->
+   <b>{% ads_post_attr "country" post %}</b>  <br>
+   тур - <font color="#FF0000">{{post.price}} {{post.currency}}</font>, 
+   {% ads_post_attr "nights" post %} н.,
+   <br>
+   <a href="/company/{{post.author.id}}/ " target="top">"{{post.author.name}}"</a>
+  </td> </tr> 
+ {% endfor %}
+</table>
+<hr>
+<table style="font-family: Arial, sans-serif; font-size: 0.9em;">
+ {% for post in russia %}
+  <tr> <td>
+   {{post.active_date|date:"d.m.y"}}
+   <!--{{post.active_date.day}}.{{post.active_date.month}}.{{post.active_date.year}} -->
+   <b>Россия</b>  <br>
+   тур - <font color="#FF0000">{{post.price}} {{post.currency}}</font> , 
+   {% ads_post_attr "nights" post %} н.,
+   <br>
+   <a href="/company/{{post.author.id}}/ " target="top">"{{post.author.name}}"</a>
+  </td> </tr> 
+ {% endfor %}
+</table>
+<br><br><br>
+</div>

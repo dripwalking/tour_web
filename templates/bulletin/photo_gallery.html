@@ -1,0 +1,42 @@
+{% load publication_filters %}
+
+<table cellpadding="0" cellspacing="0">
+    <tr  bgcolor="#F3F3F3">
+        <td colspan="2">
+           {% ifnotequal mode "mail-preview" %} {% ifnotequal photos_count 0 %} <h2 class="tit">ФОТОЛЕНТЫ КОМПАНИЙ </h2> {% endifnotequal %} {% endifnotequal %}
+           {% ifequal mode "mail-preview" %}<h2 class="tit">ФОТОЛЕНТЫ КОМПАНИЙ </h2>  {% endifequal %}
+        </td>
+    </tr>
+    <tr>
+        <td style="background-color: #cccccc; height: 1px;" colspan="2">
+            
+        </td>
+    </tr>
+    {% for item in photos %}
+        <tr>
+            <td colspan="2">
+                <a href="http://www.tourprom.ru/profi/content/photoalbum/{{item.id}}"><b>{{ item.title }}</b></a>
+                <br>
+                <i>Фотолента от компании «<b><a href="http://{{site}}/company/{{item.user.id}}/">{{item.get_user}}</a></b>»:</i>
+                <br>
+                {% if item.bulletin_short %} &nbsp; {% else %}{{ item.description|striptags|truncate_chars:500|safe }}{%endif%}
+                <br>
+                Смотрите фотоленту компании <a href="http://{{site}}/profi/content/photoalbum/{{item.id}}">по данной ссылке на нашем портале</a>.
+               <br><br>
+            </td>
+        </tr>
+    <tr>
+        <td style="background-color: #cccccc; height: 1px;">
+            
+        </td>
+        <td width="50%">
+            
+        </td>
+    </tr>
+        <tr>
+        <td>
+            &nbsp;
+        </td>
+    </tr>
+    {% endfor %}
+</table>

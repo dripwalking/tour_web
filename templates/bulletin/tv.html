@@ -1,0 +1,40 @@
+{% load publication_filters %}
+
+<table cellpadding="0" cellspacing="0">
+    <tr  bgcolor="#F3F3F3">
+        <td colspan="2">
+           {% ifnotequal mode "mail-preview" %} {% ifnotequal video_count 0 %} <h2 class="tit">ТУРПРОМ-ТВ </h2> {% endifnotequal %} {% endifnotequal %}
+           {% ifequal mode "mail-preview" %}<h2 class="tit">ТУРПРОМ-ТВ </h2>  (<a target="_blank" href="/admin/tv/tv_to_bulletin/{{ pub_date|date:'Y-m-d' }}/">Добавить / удалить</a>){% endifequal %}
+        </td>
+    </tr>
+    <tr>
+        <td style="background-color: #cccccc; height: 1px;" colspan="2">
+            
+        </td>
+    </tr>
+   <br> {% for item in videos %}
+        <tr>
+            <td colspan="2">
+                Видео-выпуск: «<a href="http://www.tourprom.ru/tv/show/{{item.id}}"><b>{{ item.title }}</b></a>»
+                <br><br>
+                {% if item.bulletin_short %} &nbsp; {% else %}{{ item.description|striptags|truncate_chars:1000|safe }}{%endif%}
+                <br> <br>
+                Смотрите этот видео-выпуск <a href="http://www.tourprom.ru/tv/show/{{item.id}}">по данной ссылке в ТУРПРОМ-ТВ</a>.
+                <br><br>
+            </td>
+        </tr>
+    <tr>
+        <td style="background-color: #cccccc; height: 1px;">
+            
+        </td>
+        <td width="50%">
+            
+        </td>
+    </tr>
+        <tr>
+        <td>
+            &nbsp;
+        </td>
+    </tr>
+    {% endfor %}
+</table>

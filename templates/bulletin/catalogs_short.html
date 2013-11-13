@@ -1,0 +1,41 @@
+<table cellpadding="0" cellspacing="0" style="border: 2px solid #999;padding: 10px;font-size: 0.9em;" width="100%">
+    <tr  bgcolor="#F3F3F3">
+        <td colspan="2">
+            <h2 style="color: #050CD8;margin: 10px 10px 7px 10px;font-size: 1.2em;">КАТАЛОГИ КОМПАНИЙ</h2>
+        </td>
+    </tr>
+    <tr>
+        <td style="background-color: #cccccc; height: 1px;" colspan="2">
+
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            &nbsp;
+        </td>
+    </tr>
+        <tr>
+            <td colspan="2">
+                <b>В этом месяце вы можете полистать следующие каталоги:</b><br><br>
+                {% for reserve in reserves %}
+                {% with reserve.catalog as item %}
+                «<a href="http://{{site}}/profi/content/catalog/{{item.id}}/" target="_blank">{{ item.title }}</a>» от компании «<a href="http://{{site}}/company/{{item.user.id}}/" target="_blank">{{item.user.name}}</a>»<br>
+                {% endwith %}
+                {% endfor %}
+                <br>
+            </td>
+        </tr>
+    <tr>
+        <td style="background-color: #cccccc; height: 1px;">
+
+        </td>
+        <td width="50%">
+
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            &nbsp;
+        </td>
+    </tr>
+</table>

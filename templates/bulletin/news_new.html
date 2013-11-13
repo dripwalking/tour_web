@@ -1,0 +1,61 @@
+{% load publication_filters %}
+
+<table cellpadding="0" cellspacing="0" style="font-size: 0.9em;">
+    <tr  bgcolor="#F3F3F3">
+        <td colspan="2">
+            <h2 style="color: #050CD8;margin: 10px 10px 7px 10px;font-size: 1.2em;">НОВОСТИ ТУРБИЗНЕСА</h2>{% ifequal mode "mail-preview" %}(<a target="_blank" href="/admin/news/add_to_bulletin/{{ pub_date|date:'Y-m-d' }}/">Добавить / удалить</a>){% endifequal %}
+        </td>
+    </tr>
+    <tr>
+        <td style="background-color: #cccccc; height: 1px;" colspan="2">
+        </td>
+    </tr>
+    {% for item in news %}
+    <tr>
+        <td colspan="2">
+            <br>
+            <b>{{ item.title }}</b>
+
+            {% if item.subtitle %}<br><i>{{ item.subtitle }}</i>{% endif %}
+            <br>
+            {% with item.get_image as image %}
+                {% if image %}<img src="http://{{site}}{{image.image.url}}" align="left" width="{{image.image.width}}" height="{{image.image.height}}" style="margin:15px 15px 0 0;" alt="{% for country in item.countries.all %}{% if not forloop.last %}, {% endif %}{% endfor %}" style="color:#050cd8; font-weight: bold;">{% endif %}
+            {% endwith %}
+            {{ item.text|safe }}
+
+
+            <i><a href="http://{{site}}/news/{{item.id}}#comm" style="color:#ff0000;" target="_blank">Прокомментировать</a> {{item.id|comm_count_index}}</i>
+            <br><br>
+
+            <i>
+                {% for country in item.countries.all %}
+                    <a href="http://{{site}}/news/?country={{country.id}}" target="_blank">{{country.title}}</a>{% if not forloop.last %}, {% endif %}
+                    {% if forloop.last %} / {% endif %}
+                {% endfor %}
+
+                {% if item.rubrics %}
+                {% for rubric in item.rubrics.all %}
+                <a href="http://{{site}}/news/?rubric={{rubric.id}}" target="_blank">{{rubric.title}}</a>{% if not forloop.last %} / {% endif %}
+                {% endfor %}
+                {% endif %}
+            </i>
+
+
+            <br><br>
+        </td>
+    </tr>
+    <tr>
+        <td style="background-color: #cccccc; height: 1px;">
+
+        </td>
+        <td width="50%">
+
+        </td>
+    </tr>
+    <tr>
+        <td>
+            &nbsp;
+        </td>
+    </tr>
+    {% endfor %}
+</table>

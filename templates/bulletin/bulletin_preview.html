@@ -1,0 +1,67 @@
+{% if bulletin_already_exists %}
+<b>Внимание, бюллетень за {{pub_date}} уже публиковался! </b>
+
+{% endif %}
+
+<div>
+<b>Статистика</b>
+<table>
+<tr><td>
+Объявлений всего
+</td><td>
+ {{post_count}}
+</td></tr>
+<tr><td>
+Объявлений авиа
+</td><td> {{post_avia_count}}
+</td></tr>
+<tr><td>
+Объявлений тур
+</td><td>
+{{post_tour_count}}
+</td></tr>
+<tr><td>
+Вакансий
+</td><td>
+{{post_vacancy_count}}
+</td></tr>
+<tr><td>
+Резюме
+</td><td>
+{{post_cv_count}}
+</td></tr>
+<tr><td>
+Остальное
+</td><td>
+{{post_rest_count}}
+</td></tr>
+</table>
+</div>
+
+
+<div>
+ {% include 'bulletin/bulletin.html' %} 
+</div>
+<hr>
+
+ <form action="/admin/bulletin/send/{{pub_date}}/" method="POST">
+ <table>
+   <p><input type="radio" name="server" value="remote" checked>Удаленный сервер</p>
+   <p><input type="radio" name="server" value="local">Локальный сервер</p>
+ <hr>
+ 
+  <tr>
+    <td>C:</td>
+    <td><input type="text" name="from"/></td>
+  </tr>
+  
+   <tr>
+    <td>По:</td>
+    <td><input type="text" name="to"/></td>
+  </tr>
+
+ 
+ </table>
+ <input type="submit" name="snd" value="Разослать" />
+ </form>
+ 

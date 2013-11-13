@@ -1,0 +1,185 @@
+{% load publication_filters %}
+{% load banner_tags %}
+
+{% ifequal mode "email" %}
+
+<style type="text/css" media="screen">
+body {
+	color: #000;
+	background-color:#e6e6e6;
+	font-family: Arial, sans-serif;
+	font-size: 1em;
+	margin: 0;
+	padding: 0;
+}
+</style>
+
+
+<div class="wrap" style="margin: 0 auto;text-align:left;width: 724px;background-color:#fff;padding: 8px;font-size: 16px;">
+
+<!-- Header --> 
+<table cellpadding="3" cellspacing="3" border="0" width="724" align="center" style="font-size: 0.9em;">
+ <tr valign="top">
+  <td colspan="3" align="center">
+    {% st_ban_show 'Tourprom_Bulletin_Head' bulletin_date %}
+  </td>
+ </tr>
+ <tr valign="top">
+  <td colspan="3" style="text-align:center;"><span style="color:#050cd8;"><b>«ТУРПРОМ» ЕЖЕДНЕВНАЯ ДЕЛОВАЯ ГАЗЕТА ТУРБИЗНЕСА, ВЫПУСК №{{issue_year}} ({{issue}}) от {{pub_date}}</b></span></td>
+ </tr>
+ <tr valign="top">
+  <td width="150" rowspan="2"><a href="http://www.tourprom.ru" target="_blank"><img src="http://www.tourprom.ru/site_media/images/logo-s.gif" border="0" width="140" height="95" alt="ТУРПРОМ" style="color:#050cd8; font-weight: bold;"/></a></td>
+  <td style="vertical-align: middle;">
+   для связи с редакцией:
+   <br/>
+   e-mail: <a href="mailto:smi@tourprom.ru">smi@tourprom.ru</a>
+   <br/>
+   веб-портал: <a href="http://www.tourprom.ru">www.tourprom.ru</a>
+   <br/>
+   телефон: 585-80-10, 585-40-35
+  </td>
+  <td style="vertical-align: middle;">
+   Подписчиков: <span style="color:#d01e1e">{{subs_count}}</span>
+   <br/>
+   <a href="http://www.tourprom.ru/bulletin/subscribe/" target="_blank"><i>Подписаться</i></a> / <a href="http://www.tourprom.ru/bulletin/unsubscribe/"><i>Отписаться</i></a>
+   <br/>
+   <a href="http://www.tourprom.ru/reklama/" style="color:#d01e1e" target="_blank">Заказать рекламу =>>></a>
+  </td>
+ </tr>
+ <tr>
+    <td colspan="2" style="vertical-align: bottom;">
+        <a href="http://www.tourprom.ru/bulletin/help/" target="_blank"><i>Как смотреть бюллетень Турпрома в полном объёме? См. инструкцию =></i></a>
+    </td>
+ </tr>
+ <tr valign="top">
+  <td colspan="3">
+  <hr>
+  </td>
+ </tr>
+</table>
+<!-- /Header -->
+
+
+<!-- Block 1 -->
+<table cellpadding="3" cellspacing="3" border="0" width="724" align="center" style="font-size: 0.9em;">
+<tr>
+
+<td width="548" style="border-right: 2px ridge #EEE;padding-right:10px;vertical-align:top;text-align:left;">
+{{ anounces }}
+<br/>
+{% st_ban_show 'Tourprom_Bulletin_Center' bulletin_date %}
+</td>
+<td style="padding-left:5px;vertical-align:top;text-align:left;">
+    {% st_ban_show 'Tourprom_Bulletin_Right' bulletin_date %}
+    <br/><br/>
+    <div>
+        <div style="background-color: #F3F3F3;padding: 5px;border-bottom: 1px solid #cccccc;color: #050CD8;">
+        <b><a href="http://www.tourprom.ru/information/currency/" target="_blank">Курсы валют ЦБ</a></b>
+        </div>
+        {{usd_mail|safe}}
+        {{eur_mail|safe}}
+        <a href="http://www.tourprom.ru/information/currency/" target="_blank"><i style="font-size: 0.8em;">Все валюты мира</i></a>
+    </div>
+    <br/>
+    <div>
+        <div style="background-color: #F3F3F3;padding: 5px;border-bottom: 1px solid #cccccc;color: #050CD8;">
+            <b><a href="http://www.tourprom.ru/information/weather/" target="_blank">Прогноз погоды</a></b>
+        </div>
+        {{weather_res|safe}}
+        <a href="http://www.tourprom.ru/information/weather/" target="_blank"><i style="font-size: 0.8em;">Все курорты мира</i></a>
+    </div>
+</td>
+
+</tr>
+</table>
+<!-- /Block 1 -->
+
+
+<!-- Block 2 -->
+    <table cellpadding="3" cellspacing="3" border="0" width="724" align="center" style="font-size: 0.9em;">
+        <tr>
+            <td>
+                {{ news }}
+                <br>
+                {{ headlines }}
+            </td>
+        </tr>
+    </table>
+    <!-- /Block 2 -->
+
+
+<!-- Block 3 -->
+    <table cellpadding="3" cellspacing="3" border="0" width="724" align="center" style="font-size: 0.9em;">
+        <tr>
+
+            <td width="548" style="border-right: 2px ridge #EEE;padding-right:10px;vertical-align:top;text-align:left;">
+                {{ informers }}
+            </td>
+            <td style="padding-left:5px;vertical-align:top;text-align:left;">
+                {{ video }}
+                {{ photogallery }}
+                {{ expert }}
+                {{ quest }}
+                {{ interview }}
+            </td>
+        </tr>
+    </table>
+<!-- /Block 3 -->
+
+
+<!-- Block 4 -->
+    <table cellpadding="3" cellspacing="3" border="0" width="724" align="center" style="font-size: 0.9em;">
+        <tr>
+            <td>
+                {{ catalogs }}
+            </td>
+        </tr>
+    </table>
+    <!-- /Block 4 -->
+
+
+<table cellpadding="0" cellspacing="0" border="0" width="724" align="center" style="font-size: 0.9em;">
+ <tr>
+  <td valign="top" align="center" style="background-color:#F3F3F3;">
+  <h2 style="color: #050CD8;margin: 10px 10px 7px 10px;font-size: 1.2em;">ТОРГОВАЯ ПЛОЩАДКА</h2>
+  </td>
+ </tr>
+</table>
+{% endifequal %}
+
+
+<table cellpadding="3" cellspacing="3" border="0" width="100%" style="font-size: 0.9em;">
+{% for entry in entries %}
+<tr>
+ <td align="center">
+
+ <h3>{% if entry.page.parent %}{{entry.page.parent.title}} - {% endif %}{{entry.page.title}}</h3>
+
+ </td> 
+</tr>
+    <tr>
+        <td style="background-color: #cccccc; height: 2px;">
+            
+        </td>
+    </tr>
+<tr>
+ <td>
+ {{entry.html}} {% if is_search %}<span style="color:#44aadd;">Опубликовано {{entry.post.publish_date|date:"d.m.Y"}})</span>{% endif %}
+ </td> 
+</tr>
+
+{% endfor %}
+</table>
+
+{% ifequal mode "email" %}
+    {{ job_messages }}
+{% endifequal %}
+
+    <hr>
+Инфогруппа «Турпром» не несет ответственность за содержание и достоверность рекламной информации и объявлений. 
+Мнение редакции может не совпадать с мнением наших авторов.
+<hr>
+
+{% ifequal mode "email" %}
+</div>
+{% endifequal %}

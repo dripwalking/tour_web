@@ -1,0 +1,34 @@
+<table cellpadding="0" cellspacing="0" style="font-size: 0.9em;">
+    <tr  bgcolor="#F3F3F3">
+        <td colspan="2">
+            <h2 style="color: #050CD8;margin: 10px 10px 7px 10px;font-size: 1.2em;">АКТУАЛЬНОЕ ИНТЕРВЬЮ</h2>
+        </td>
+    </tr>
+    <tr>
+        <td style="background-color: #cccccc; height: 1px;" colspan="2">
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <br>
+            <b>{{ interview.respondent }}:</b><br>
+            <b><a href="http://{{site}}/profi/content/interview/{{interview.id}}/" target="_blank">{{ interview.title }}</a></b>
+            <br><br>
+            {% with interview.get_photo as image %}
+            {% if image %}<a href="http://{{site}}/profi/content/interview/{{interview.id}}/" target="_blank"><img src="http://{{site}}{{image.get_w150_url}}" border="0" width="{{image.get_w150_size.0}}" height="{{image.get_w150_size.1}}" alt="{{interview.user.name}}"></a>{% endif %}
+            {% endwith %}
+            <br>
+            {{ interview.description|safe }}
+            <a href="http://{{site}}/profi/content/interview/{{interview.id}}/" target="_blank">Интервью полностью</a><br>
+            <br>
+        </td>
+    </tr>
+    <tr>
+        <td style="background-color: #cccccc; height: 1px;">
+
+        </td>
+        <td width="50%">
+
+        </td>
+    </tr>
+</table>

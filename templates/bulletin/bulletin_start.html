@@ -1,0 +1,52 @@
+{% extends "admin/base_site.html" %}
+{% block title %} Публикация бюллетеня {% endblock %}
+
+{% block css %}
+<link type="text/css" href="/site_media/css/jquery-ui/ui.all.css" rel="stylesheet" />
+<link type="text/css" href="/site_media/css/jquery-ui/jquery-ui.custom.css" rel="stylesheet" />
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript" src="/site_media/js/jquery-ui/ui.core.js"></script>
+<script type="text/javascript" src="/site_media/js/jquery-ui/ui.datepicker.js"></script>
+<script type="text/javascript" src="/site_media/js/jquery-ui/i18n/ui.datepicker-ru.js"></script>
+<script type="text/javascript">
+$(function() {
+
+    $(".calendar").datepicker({showOn: 'both', buttonImage: '/site_media/images/calendar.gif', buttonImageOnly: true, onChangeMonthYear: function(year, month, inst) { datepickerColorDates(month, year); }}, $.datepicker.regional['ru']);
+    var today=new Date();
+    datepickerColorDates(today.getMonth()+1, today.getFullYear());
+
+});
+
+function datepickerColorDates(m, y) {
+
+    $.getJSON("/profi/get_informer_dates/?month=" + m + "&year=" + y,
+        function(data){
+
+        cells = $(".ui-datepicker-calendar td:not(.ui-datepicker-other-month)");
+        $.each(data.items, function(i,item){
+            if(item==0)
+                cells[i].addClass("ui-datepicker-red");
+            else if(item<7)
+                cells[i].addClass("ui-datepicker-yellow");
+            else
+                cells[i].addClass("ui-datepicker-green");
+        });
+
+    });
+
+}
+</script>
+{% endblock %}
+
+{% block content %}
+Дата публикации <br>
+<input type="text" class="calendar" id="date" name="date">
+
+<input type="submit" 
+onClick="window.location =  '/admin/bulletin/preview/' +  document.getElementById('date').value + '/' ; "
+name="Button1" value="Просмотр" id="Button1" />
+
+
+ {% endblock %}

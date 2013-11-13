@@ -1,0 +1,30 @@
+<table cellpadding="0" cellspacing="0" width="100%">
+    <tr  bgcolor="#F3F3F3">
+        <td colspan="2">
+            <h2 class="tit">ЧИТАЙ ДРУГИЕ ИНТЕРЕСНЫЕ НОВОСТИ ТУРИЗМА</h2> {% ifequal mode "mail-preview" %}(<a target="_blank" href="/admin/news/add_to_bulletin/{{ pub_date|date:'Y-m-d' }}/">Добавить / удалить</a>){% endifequal %}
+        </td>
+    </tr>
+    <tr>
+        <td style="background-color: #cccccc; height: 1px;" colspan="2">
+            
+        </td>
+    </tr>
+
+        <tr>
+            <td colspan="2">
+            <br>    {% for item in headlines %}    
+                &nbsp;&nbsp;&nbsp;&bull;&nbsp;<a href="http://{{site}}/news/{{item.id}}/">{{ item.title }}</a><br>
+                {% endfor %}
+            <br><i><a href="http://{{site}}/news/">Все новости туризма ==>></a></i> <br>
+            </td>
+        </tr>
+    <tr>
+        <td style="background-color: #cccccc; height: 1px;">
+            
+        </td>
+        <td width="50%">
+            
+        </td>
+    </tr>
+
+</table>

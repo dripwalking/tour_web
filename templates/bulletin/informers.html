@@ -1,0 +1,45 @@
+<table cellpadding="0" cellspacing="0">
+    <tr  bgcolor="#F3F3F3">
+        <td colspan="2">
+            <h2>ИНФОРМЕР КОМПАНИЙ</h2>
+            <b>(новости компаний на правах рекламы)</b>
+        </td>
+    </tr>
+    <tr>
+        <td style="background-color: #cccccc; height: 1px;" colspan="2">
+            
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            &nbsp;
+        </td>
+    </tr>
+    {% for item in informers %}
+        <tr>
+            <td colspan="2">
+                <b>{{ item.title }}</b> {% ifequal mode "mail-preview" %}(<a href="/admin/advertisers/informer/{{item.id}}/"><b>редактировать</b></a>){% endifequal %}
+                <br>
+                    {% if item.subtitle %}<i>{{ item.subtitle }}</i><br>{% endif %}
+                {{ item.text|safe }}
+                
+                <b>«<a href="http://{{site}}/company/{{item.user.id}}/">{{item.user.name}}</a>»</b>
+                <i>{{ item.sign|safe }}</i>
+                <br>
+            </td>
+        </tr>
+    <tr>
+        <td style="background-color: #cccccc; height: 1px;">
+            
+        </td>
+        <td width="50%">
+            
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            &nbsp;
+        </td>
+    </tr>
+    {% endfor %}
+</table>

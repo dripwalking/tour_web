@@ -1,0 +1,38 @@
+{% extends "admin/base_site.html" %}
+{% block title %} Отчет об рассылке бюллетеня {% endblock %}
+
+{% block content %}
+
+<table>
+ <tr>
+  <td>Адресатов</td>
+  <td>{{ total }}</td>
+ </tr>
+ 
+ <tr>
+  <td>Отослано</td>
+  <td>{{ sent }}</td>
+ </tr>
+ 
+ <tr>
+  <td>Не получили</td>
+  <td>
+    {% for email in failed %}
+    	{{email}}<br>
+    {% endfor %}
+  </td>
+ </tr>
+ 
+ <tr>
+  <td>Ранее получили (проигнорированы)</td>
+  <td>
+    {% for email in ignored %}
+    	{{email}}<br>
+    {% endfor %}
+  </td>
+ </tr>
+ 
+ 
+</table>
+
+{% endblock %}

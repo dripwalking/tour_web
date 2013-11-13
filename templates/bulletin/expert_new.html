@@ -1,0 +1,96 @@
+{% if expert %}
+<table cellpadding="0" cellspacing="0" style="font-size: 0.9em;">
+    <tr  bgcolor="#F3F3F3">
+        <td colspan="2">
+            <h2 style="color: #050CD8;margin: 10px 10px 7px 10px;font-size: 1.2em;">ЭКСПЕРТ НЕДЕЛИ</h2>
+        </td>
+    </tr>
+    <tr>
+        <td style="background-color: #cccccc; height: 1px;" colspan="2">
+
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <br>
+            <span style="color:#050CD8;font-weight: bold;">{{expert.expert_name}}</span>
+            <br>
+            <b>{{expert.expert_title}} компании «<a href="http://{{site}}{{expert.user.get_absolute_url}}">{{expert.user.name}}</a>»</b>
+            <br><br>
+            {% with expert.get_photo as image %}
+            {% if image %}<a href="http://{{site}}/profi/content/expert/{{expert.id}}/" target="_blank"><img src="http://{{site}}{{image.get_w150_url}}" width="{{image.get_w150_size.0}}" height="{{image.get_w150_size.1}}" alt="{{expert.user.name}}" border="0"></a>{% endif %}
+            {% endwith %}
+            <br><br>
+            <span style="color:#FF0000;">Обсуждаемая тема:</span>
+            <br>
+            <b>{{ expert.title }}</b>
+            <br><br>
+            <a href="http://{{site}}/profi/content/expert/{{expert.id}}/"  style="text-align: center;font-weight: bold;color: #FF0000;" target="_blank">ЗАДАЙ ВОПРОС =></a>
+            <br>
+            <i>
+                {{ expert.description|safe }}
+            </i>
+            {% ifequal mode "mail-preview" %}(<a href="/admin/advertisers/expert/{{expert.id}}/"><b>редактировать выпуск</b></a>)<br>{% endifequal %}
+            <br>
+        </td>
+    </tr>
+    <tr>
+        <td style="background-color: #cccccc; height: 1px;">
+
+        </td>
+        <td width="50%">
+
+        </td>
+    </tr>
+</table>
+<br>
+{% endif %}
+
+{% if special_expert %}
+<br>
+<table cellpadding="0" cellspacing="0" style="font-size: 0.9em;">
+    <tr bgcolor="#F3F3F3">
+        <td colspan="2">
+            <h2 style="color: #050CD8;margin: 10px 10px 7px 10px;font-size: 1.2em;">НАРОД ЖЕЛАЕТ ЗНАТЬ!</h2>
+        </td>
+    </tr>
+    <tr>
+        <td style="background-color: #cccccc; height: 1px;" colspan="2">
+
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <br>
+            <span style="color:#050CD8;font-weight: bold;">{{special_expert.expert_name}}</span>
+            <br>
+            <b>{{special_expert.expert_title}}</b>
+            <br><br>
+            {% with special_expert.get_photo as image %}
+            {% if image %}<a href="http://{{site}}/profi/content/expert/{{special_expert.id}}/" target="_blank"><img src="http://{{site}}{{image.get_w150_url}}" border="0"></a>{% endif %}
+            {% endwith %}
+            <br><br>
+            <span style="color:#FF0000;">Обсуждаемая тема:</span>
+            <br>
+            <b>{{ special_expert.title }}</b>
+            <br><br>
+            <a href="http://{{site}}/profi/content/expert/{{special_expert.id}}/" style="text-align: center;font-weight: bold;color: #FF0000;" target="_blank">ЗАДАЙ ВОПРОС =></a>
+            <br>
+            <i>
+                {{ special_expert.description|safe }}
+            </i>
+            {% ifequal mode "mail-preview" %}(<a href="/admin/advertisers/expert/{{special_expert.id}}/"><b>редактировать выпуск</b></a>)<br>{% endifequal %}
+            <br>
+        </td>
+    </tr>
+    <tr>
+        <td style="background-color: #cccccc; height: 1px;">
+
+        </td>
+        <td width="50%">
+
+        </td>
+    </tr>
+</table>
+<br>
+{% endif %}

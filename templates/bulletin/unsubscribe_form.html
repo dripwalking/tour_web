@@ -1,0 +1,32 @@
+{% extends "general/two_column_left_menu.html" %}
+
+
+{% block footer %}
+    {% include "general/footer_business.html" %}
+{% endblock %}
+
+
+{% block title %} Отмена подписки на бюллетень {% endblock %}
+
+
+{% block content_center %}
+
+
+<table width="90%" border="0" align="center">
+  <tr>
+    <td>
+    <h1>Отмена подписки на бюллетень</h1>
+    <br>
+    <div align="center">
+        <form action="" method="GET">
+            Ваш адрес e-mail:<input type="text" name="email">
+            <input type="submit" value="Отписаться" align="center">
+        </form>
+    </div>
+    </td>
+  </tr>
+</table>
+
+
+
+{% endblock %}

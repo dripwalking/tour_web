@@ -1,0 +1,46 @@
+<table cellpadding="0" cellspacing="0" style="border: 2px solid #999;padding: 10px;font-size: 0.9em;" width="100%">
+    <tr  bgcolor="#F3F3F3">
+        <td colspan="2">
+            <h2 style="color: #050CD8;margin: 10px 10px 7px 10px;font-size: 1.2em;">КАТАЛОГИ КОМПАНИЙ</h2>
+        </td>
+    </tr>
+    <tr>
+        <td style="background-color: #cccccc; height: 1px;" colspan="2">
+
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            &nbsp;
+        </td>
+    </tr>
+    {% for reserve in reserves %}
+    {% with reserve.catalog as item %}
+        <tr>
+            <td colspan="2">
+                <b>{{ item.title }}</b> {% ifequal mode "mail-preview" %}(<a href="/admin/advertisers/catalog/{{item.id}}/"><b>редактировать</b></a>){% endifequal %}
+                <br><br>
+                <i>Каталог компании «<a href="http://{{site}}/company/{{item.user.id}}/">{{item.user.name}}</a>»</i>
+                <br><br>
+                {{ item.description|striptags|safe }}
+                <br><br>
+                <i>Вы можете посмотреть каталог по <a href="http://{{site}}/profi/content/catalog/{{item.id}}/" target="_blank">данной ссылке на нашем портале</a></i>
+                <br><br>
+            </td>
+        </tr>
+    <tr>
+        <td style="background-color: #cccccc; height: 1px;">
+
+        </td>
+        <td width="50%">
+
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            &nbsp;
+        </td>
+    </tr>
+    {% endwith %}
+    {% endfor %}
+</table>

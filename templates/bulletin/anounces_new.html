@@ -1,0 +1,42 @@
+{% load publication_filters %}
+<table cellpadding="0" cellspacing="0" style="font-size: 0.9em;">
+    <tr  bgcolor="#F3F3F3">
+        <td colspan="2">
+            <h2 style="color: #050CD8;margin: 10px 10px 7px 10px;font-size: 1.2em;">АНОНСЫ СОБЫТИЙ</h2>
+        </td>
+    </tr>
+    <tr>
+        <td style="background-color: #cccccc; height: 1px;" colspan="2">
+            
+        </td>
+    </tr>
+  <br>  {% for item in anounces %}
+        <tr>
+            <td colspan="2">
+                <br>
+                <b>{{ item.title }}</b> {% ifequal mode "mail-preview" %}(<a href="/admin/advertisers/announcement/{{item.id}}/"><b>редактировать</b></a>){% endifequal %}
+                <br>
+                <i>Информация от компании «<b><a href="http://{{site}}/company/{{item.user.id}}/">{{item.user.name}}</a></b>»:</i>
+                <br><br>
+                <img src="http://{{site}}/site_media/{{item.user.logo.image}}" align="left" width="90" height="90" style="margin: 0 15px 5px 0;" alt="{{item.user.name}}" style="color:#050cd8; font-weight: bold;">
+                {{ item.text|striptags|truncate_chars:700|safe }}
+                <br><br>
+                Читайте полный текст АНОНСА по <a href="http://{{site}}/profi/content/anounce/{{item.id}}/" target="_blank">данной ссылке на нашем портале</a> =>
+                <br><br>
+            </td>
+        </tr>
+    <tr>
+        <td style="background-color: #cccccc; height: 1px;">
+            
+        </td>
+        <td width="50%">
+            
+        </td>
+    </tr>
+    <tr>
+        <td>
+            &nbsp;
+        </td>
+    </tr>
+    {% endfor %}
+</table>

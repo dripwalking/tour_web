@@ -1,0 +1,259 @@
+{% load publication_filters %}
+
+{% ifequal mode "email" %}
+
+<style type="text/css" media="screen">
+body {
+	color: #000;
+	background-color:#e6e6e6;
+	font-family: Arial, sans-serif;
+	font-size: 1em;
+	margin: 0;
+	padding: 0;
+}
+h2 {color: blue;}
+
+
+.wrap{
+ 	margin: 0 auto;
+	text-align:left;
+	width: 90%;
+        background-color:#fff;
+        padding: 8px;
+	font-size: 1em;
+}
+
+.xtop, .xbottom {display:block; background:transparent; font-size:1px;}
+.xb1, .xb2, .xb3, .xb4 {display:block; overflow:hidden;}
+.xb1, .xb2, .xb3 {height:1px;}
+.xb2, .xb3, .xb4 {background:#fff; border-left:1px solid #D0D1D6; border-right:1px solid #D0D1D6;}
+.xb1 {margin:0 5px; background:#D0D1D6;}
+.xb2 {margin:0 3px; border-width:0 2px;}
+.xb3 {margin:0 2px;}
+.xb4 {height:2px; margin:0 1px;}
+.head_top_content {display:block; background:#fff; border:0 solid #D0D1D6; border-width:0 1px;  text-align: center;}
+.gradientRed{
+    /* fallback (Opera) */
+    background: #ffdbf9 !important;
+    /* Mozilla: */
+    background: -moz-linear-gradient(top, #ffdbf9, #ffffff) !important;
+    /* Chrome, Safari:*/
+    background: -webkit-gradient(linear,
+                left top, left bottom, from(#ffdbf9), to(#ffffff)) !important;
+    /* MSIE */
+    filter: progid:DXImageTransform.Microsoft.Gradient(
+                StartColorStr='#ffdbf9', EndColorStr='#ffffff', GradientType=0) !important;
+  }
+IMG#user_image {
+	border:1px solid #D0D1D6;
+	padding: 3px;
+	margin-right:7px;
+	margin-bottom:7px;
+	float: left;
+}
+</style>
+
+
+<div class="wrap">
+ 
+ 
+<table cellpadding="3" cellspacing="3" border="0" width="100%">
+ <tr valign="top">
+  <td colspan="3"><font color="blue"><b>"ТУРПРОМ" - ЕЖЕДНЕВНЫЙ ЭЛЕКТРОННЫЙ БЮЛЛЕТЕНЬ ТУРИСТИЧЕСКОГО БИЗНЕСА, ИЗДАЕТСЯ С 2004 ГОДА</b></font></td>
+ </tr>
+ <tr valign="top">
+  <td width="150"><a href="http://www.tourprom.ru"><img src="http://www.tourprom.ru/site_media/images/logo-s.gif" border="0"></a></td>
+  <td>
+   выпуск № {{issue_year}} ({{issue}}) от {{pub_date}}
+   <br><br>
+   для связи с редакцией:
+   <br>
+   e-mail: <a href="mailto:smi@tourprom.ru">smi@tourprom.ru</a>
+   <br>
+   веб-портал: <a href="http://www.tourprom.ru">www.tourprom.ru<a/>
+   <br>
+   телефон: 585-80-10, 585-40-35
+  
+  </td>
+  <td>
+   
+   Автоматическая подписка и отписка:
+   <br>
+   <a href="http://www.tourprom.ru/bulletin/subscribe/">ПОДПИСАТЬСЯ</a> / <a href="http://www.tourprom.ru/bulletin/unsubscribe/">ОТПИСАТЬСЯ</a>
+   <br><br>
+   <!-- Ваш адрес:{{your_email}}
+   <br><br>
+   Количество подписчиков: [count] -->
+    <br>
+     <b><font color="#DD0000"> Подписчиков: {{subs_count}} </font></b>
+   <br>
+    <a href="http://www.tourprom.ru/reklama/">ЗАКАЗАТЬ РЕКЛАМУ =>>></a>
+  </td>
+ </tr>
+ <tr valign="top">
+  <td colspan="3">
+  <hr>
+  </td>
+ </tr>
+ <tr valign="top">
+  <td colspan="3">
+  <a href="#1">АНОНСЫ</a> / <a href="#2">НОВОСТИ ТУРБИЗНЕСА</a> / <a href="#3">ЭКСПЕРТ НЕДЕЛИ</a> /
+  <a href="#4">ИНФОРМЕР КОМПАНИЙ</a> / <a href="#5">ТОРГОВАЯ ПЛОЩАДКА</a>
+  </td>
+ </tr>
+ <tr valign="top">
+  <td colspan="3">
+  <hr>
+  </td>
+ </tr>
+</table>
+
+<br>
+
+<table cellpadding="5" cellspacing="5" border="0">
+<tr>
+<td width="360" valign="top">
+
+	<table cellpadding="3" cellspacing="3" border="0" width="300">
+	<tr><td><b>Котировка валют на {{pub_date}}</b></td></tr>
+	</table>
+	<table cellpadding="0" cellspacing="0" border="1" width="300" style="border: 1px groove #eee;">
+	 <tr valign="top" style="background-color: #ddd;">
+	  <td align="center"> валюта </td>
+	  <td align="center"> курс </td>
+	  <td align="center"> изменение </td>
+	   </tr>
+	 <tr>{{usd_mail|safe}}</tr>
+	 <tr>{{eur_mail|safe}}</tr>
+	
+	</table>
+	
+	<br>
+		
+	
+
+</td>
+
+<td width="460" valign="top">
+
+	<table cellpadding="3" cellspacing="3" border="0">
+	<tr><td><b>Погода в городах и курортах, прогноз на {{pub_date}}</b></td></tr>
+	</table>
+	<table cellpadding="0" cellspacing="0" border="1" width="350" style="border: 1px groove #eee;">
+	 <tr valign="top" style="background-color: #ddd;">
+	  <td align="center"> курорт </td>
+	  <td align="center"> день </td>
+	  <td align="center"> ночь </td>
+	  <td align="center"> &nbsp;</td>
+	   </tr>
+	{{weather_res|safe}}
+	</table>
+
+</td>
+</tr>
+</table>
+
+
+<hr>
+
+{% endifequal %}
+
+
+<!--
+<table cellpadding="3" cellspacing="3" border="0" width="100%">
+ <tr valign="top">
+ 
+ <td>
+  <b>Туристическая Социальная сеть:</b>
+  <br>
+   Количество участников: всего - [count] 
+  <br> 
+  За последние сутки новых: отзывов - {{review_count}}, рассказов в блогах - {{blogs_count}}, фото - {{photo_count}},
+  новых сообщений в сообществах({{community_count}}) - {{community_entry_count}}
+  <br><br>
+  <a href="http://www.tourprom.ru/community/show/">Присоединиться к сети ->>></a>
+  <br>
+ </td>
+
+ <td>
+  <b>ТУРОПЕДИЯ - народная энциклопедия стран, курортов, отелей и круизов:</b>
+  <br><br>
+  Стран: {{country_count}}, курортов: {{resort_count}}, отелей: {{hotel_count}}, круизных кораблей: {{ship_count}}.
+  Количество правок в туропедии за последние сутки: {{touropedia_count}}.
+  <br><br>
+  <a href="http://www.tourprom.ru/country/">Поделиться своим опытом и знаниями ->>></a>
+ </td>
+ </tr>
+</table>
+<hr>
+-->
+
+ 
+{% ifequal mode "email" %}
+
+<br><br>
+<a name=""></a>
+{{ anounces }}
+<br>
+{{ video }}
+<br>
+{{ quest }}
+<br>
+{{ news }}
+<br>
+{{ headlines }}
+<br>
+{{ expert }}
+<br>
+{{ interview }}
+<br>
+{{ photogallery }}
+<br>
+{{ informers }}
+<br>
+{{ catalogs }}
+<br>
+
+	
+	
+<table cellpadding="0" cellspacing="0" border="0" width="100%">
+ <tr>
+  <td valign="top" align="center" style="background-color:#F3F3F3;">
+  <h2>ТОРГОВАЯ ПЛОЩАДКА</h2>
+  </td>
+ </tr>
+</table>
+{% endifequal %}
+
+
+<table cellpadding="3" cellspacing="3" border="0" width="100%">
+{% for entry in entries %}
+<tr>
+ <td align="center">
+
+ <h3>{% if entry.page.parent %}{{entry.page.parent.title}} - {% endif %}{{entry.page.title}}</h3>
+
+ </td> 
+</tr>
+    <tr>
+        <td style="background-color: #cccccc; height: 2px;">
+            
+        </td>
+    </tr>
+<tr>
+ <td>
+ {{entry.html}} {% if is_search %}<span style="color:#44aadd;">Опубликовано {{entry.post.publish_date|date:"d.m.Y"}})</span>{% endif %}
+ </td> 
+</tr>
+
+{% endfor %}
+</table>
+
+<hr>
+Инфогруппа «Турпром» не несет ответственность за содержание и достоверность рекламной информации и объявлений. 
+Мнение редакции может не совпадать с мнением наших авторов.
+<hr>
+
+{% ifequal mode "email" %}
+</div>
+{% endifequal %}

@@ -1,0 +1,55 @@
+<table cellpadding="0" cellspacing="0" border="0" width="724" align="center" style="font-size: 0.9em;">
+    <tr>
+        <td valign="top" align="center" style="background-color:#F3F3F3;">
+            <h2 style="color: #050CD8;margin: 10px 10px 7px 10px;font-size: 1.2em;">РАБОТА В ТУРИЗМЕ</h2>
+        </td>
+    </tr>
+</table>
+
+{% if vacancies %}
+<table cellpadding="3" cellspacing="3" border="0" width="100%" style="font-size: 0.9em;">
+    <tr>
+        <td align="center">
+            <h3>Вакансии</h3>
+        </td>
+    </tr>
+    <tr>
+        <td style="background-color: #cccccc; height: 2px;">
+        </td>
+    </tr>
+    {% for v in vacancies%}
+    {% with v.vacancy as vacancy %}
+    <tr>
+        <td>
+            {% include 'job/block_vacancy_short.html' %}
+            {% ifequal mode "mail-preview" %}(<a href="/admin/job/vacancy/{{ vacancy.id }}">Редактировать</a>){% endifequal %}
+            <hr>
+        </td>
+    </tr>
+    {% endwith %}
+    {% endfor %}
+</table>
+{% endif %}
+
+{% if resumes %}
+<table cellpadding="3" cellspacing="3" border="0" width="100%" style="font-size: 0.9em;">
+    <tr>
+        <td align="center">
+            <h3>Резюме</h3>
+        </td>
+    </tr>
+    <tr>
+        <td style="background-color: #cccccc; height: 2px;">
+        </td>
+    </tr>
+    {% for resume in resumes %}
+    <tr>
+        <td>
+            {% include 'job/block_resume_short.html' %}
+            {% ifequal mode "mail-preview" %}(<a href="/admin/job/resume/{{ resume.id }}">Редактировать</a>){% endifequal %}
+            <hr>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}

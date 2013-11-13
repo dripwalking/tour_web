@@ -1,0 +1,64 @@
+{% load publication_filters %}
+
+<table cellpadding="0" cellspacing="0">
+    <tr  bgcolor="#F3F3F3">
+        <td colspan="2">
+            <h2 class="tit">НОВОСТИ ТУРБИЗНЕСА</h2>{% ifequal mode "mail-preview" %}(<a target="_blank" href="/admin/news/add_to_bulletin/{{ pub_date|date:'Y-m-d' }}/">Добавить / удалить</a>){% endifequal %}
+        </td>
+    </tr>
+    <tr>
+        <td style="background-color: #cccccc; height: 1px;" colspan="2">
+           </td>
+    </tr>
+  <br>  {% for item in news %}
+        <tr>
+            <td colspan="2">
+                <b>{{ item.title }}</b>
+                
+                {% if item.subtitle %}<br><i>{{ item.subtitle }}</i>{% endif %}
+                <br>
+                {{ item.text|safe }}
+                
+                
+                <i><a href="http://{{site}}/news/{{item.id}}#comm"><span style="color:red;">Оставить свой комментарий к новости</a> {{item.id|comm_count_index}}</i>
+                <br><br>
+                
+                {% if item.countries %}
+               <i> Все другие новости по стране:
+                    {% for country in item.countries.all %}
+                        <a href="http://{{site}}/news/?country={{country.id}}">{{country.title}}</a>{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                <br>
+                {% if item.rubrics %}
+                Другие новости рубрики:
+                    {% for rubric in item.rubrics.all %}
+                        <a href="http://{{site}}/news/?rubric={{rubric.id}}">{{rubric.title}}</a>{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                {% endif %}
+                    <br>
+                Смотри подробное описание страны
+                    {% for country in item.countries.all %}
+                    <a href="http://{{site}}/{%ifequal item.id 2%}countri{%else%}country{%endifequal%}/{{country.title_en}}">{{country.title}}</a>{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                     в «<a href="http://{{site}}/country/">ТУРОПЕДИИ</a>» (<a href="http://{{site}}/country/">народной энциклопедии стран, курортов, отелей и круизов</a>)
+                </i>{% endif %}
+                
+                
+                <br><br>
+            </td>
+        </tr>
+    <tr>
+        <td style="background-color: #cccccc; height: 1px;">
+            
+        </td>
+        <td width="50%">
+            
+        </td>
+    </tr>
+        <tr>
+        <td>
+            &nbsp;
+        </td>
+    </tr>
+    {% endfor %}
+</table>

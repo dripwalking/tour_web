@@ -1,0 +1,152 @@
+{% extends "general/one_column.html" %}
+
+{% load adsman_tags %}
+
+{% block content_center %}
+
+<p>&nbsp;</p>
+
+<div class="content_left_2c_sub_right" style="width:686px;">
+        <div id="title_block"><h1 style="padding: 2px; margin:0;">Горящие туры и авиабилеты на торговой площадке российского турбизнеса</div>
+        <p>&nbsp;</p>
+        Электронная Туристическая Биржа (ETB): спрецпредложения туроператоров по авиабилетам и турам поступают в режиме реального времени на торговую площадку с 00:00 до 20:00, после чего публикуются в завтрашнем Бюллетене ТУРПРОМа.
+        <p>&nbsp;</p>
+        <div class="ads-buttons">
+            <a href="/adspages/"><img src="/site_media/images/new-obiavlenie.png" style="margin: 0 10px;"></a>            
+            <a href="{% if user.is_authenticated %}/accounts/subscriptions/{% else %}/registration/{% endif %}"><img src="/site_media/images/podpiska-bulleten.png" style="margin: 0 10px;"></a>
+        </div>
+        <p>&nbsp;</p>
+</div>
+<div class="content_right_2c_sub_right" style="width:236px;">
+        <b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b><b class="xb4"></b></b>
+        <div class="head_top_content" style="text-align: left;">
+        <table width="100%" border="0" cellpadding="5" cellspacing="5">
+          <tr valign="top"> 
+            <td>
+                <div>
+                    <div id="title_block">ПОИСК ПО АВИАБИЛЕТАМ</div>
+                    <br />
+                    Выберите направление, чтобы отобрать по нему все актуальные авиабилеты:
+                    <br/>
+                    <form action="/tradearea/avia/" method="GET">
+                        {% ads_airport "airport" "" "" values %}                       
+                        <br/>
+                        <input type="submit" value="Выбрать" id="Button1" />
+                    </form>
+                </div>                        
+                <p>&nbsp;</p>				
+                <div>
+                    <div id="title_block">ПОИСК ПО ТУРАМ</div>
+                    <br />
+                    Выберите страну, чтобы подобрать по ней все актуальные туры:
+                    <br/>
+                    <form action="/tradearea/tour/" method="GET">
+                        {% ads_country_single "country" "" "" values %}            
+                        <br/>
+                        <input type="submit" value="Выбрать" id="Button1" />
+                    </form>
+                </div>
+                <p>&nbsp;</p>
+                <div>
+                    <a href="/tradearea/">Очистить фильтр</a>
+                </div>
+            </td>
+          </tr>
+        </table>
+        </div>
+        <b class="xbottom"><b class="xb4"></b><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b><br><br>
+</div>
+<div class="top-clear"></div>
+<br>
+<br>
+<div>
+    <a href="/tradearea/favorites/" class="dotted-link">Моя корзина отобранных объявлений (<b id="basketSize">{{favorites_count}}</b>)</a>
+</div>
+
+
+<br>
+<b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b><b class="xb4"></b></b>
+<div class="head_top_content" style="text-align: left;">
+<table width="930" border="0" cellpadding="5" cellspacing="5">
+  <tr valign="top"> 
+    <td>
+
+<a name="messages"></a>
+<div id="title_block" style="text-align: center;">Объявления по направлению {{location}}</div><br>
+						  
+<noindex>
+<div>
+
+    <div>
+    {% for entry in entries %}
+        <div class="tradearea-row odd" id="message_{{entry.post.id}}">
+            {{entry.html}}
+            <br>
+            <a class="dotted-link tradearea-add-favorites" href="/tradearea/add_to_favorites/{{entry.post.id}}/">Отобрать в корзину</a>
+        </div>
+    {% endfor %}
+    </div>
+    
+    
+    <hr>
+    Инфогруппа «Турпром» не несет ответственность за содержание и достоверность рекламной информации и объявлений. 
+    Мнение редакции может не совпадать с мнением наших авторов.
+    <hr>
+
+    {% include 'general/login_dialog.html' %}
+
+</div>
+</noindex>
+
+</td>
+  </tr>
+</table>
+
+</div>
+<b class="xbottom"><b class="xb4"></b><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b><br><br>
+
+{% endblock %}
+
+
+ {% block breadcomb %}
+
+<a href="/">Главная</a> / Торговая площадка: актуальные туры и авиабилеты от туроператоров
+
+{% endblock %}
+
+ {% block title %}
+ Торговая площадка туррынка: горящие туры и горящие авиабилеты | Турпром
+{% endblock %}
+
+
+{% block meta_name %}
+<meta name="keywords" content="горящие путевки, горящие туры, горящие авиабилеты"> 
+<meta name="description" content="Горящие туры, горящие путевки, горящие авиабилеты на торговой площадке туроператоров | Турпром">
+{% endblock %}
+
+
+{% block javascript %}
+<script type="text/javascript" src="/site_media/js/menu_site_bus.js"></script>
+<script type="text/javascript" src="/site_media/js/jquery-ui/ui.core.js"></script>
+
+<script>
+$(function() {
+  {% for fav in favorites %}
+  $('#message_{{fav}}').find('.tradearea-add-favorites').replaceWith('<span class="tradearea-in-favorites">Уже в корзине</span>');
+  {% endfor %}
+});
+</script>
+
+{% endblock %}
+{% block css %}
+    <link type="text/css" href="/site_media/css/jquery-ui/ui.all.css" rel="stylesheet" />
+    <link type="text/css" href="/site_media/css/jquery-ui/jquery-ui.custom.css" rel="stylesheet" />
+    <style type="text/css">
+    select[name='airport'], select[name='country'] { width:220px; }
+    .ads-buttons { text-align: center; }
+    .ads-buttons a:hover { background: none; }
+    </style>
+{% endblock %}
+{% block footer %}
+    {% include "general/footer_business.html" %}
+{% endblock %}

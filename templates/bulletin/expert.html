@@ -1,0 +1,87 @@
+{% if expert %}
+<br>
+<table cellpadding="0" cellspacing="0">
+    <tr  bgcolor="#F3F3F3">
+        <td colspan="2">
+            <h2 class="tit">ЭКСПЕРТ НЕДЕЛИ</h2>
+        </td>
+    </tr>
+    <tr>
+        <td style="background-color: #cccccc; height: 1px;" colspan="2">
+            
+        </td>
+    </tr>
+        <tr>
+            <td colspan="2">
+                <b><font color="#0000FF">{{ expert.title }}</font></b>
+                <br>
+                <b>С {{ expert.pubdate|date:"d.m.Y" }} по {{ expert.enddate|date:"d.m.Y" }} 
+                эксперт недели {{expert.expert_name}}, {{expert.expert_title}} компании «{{expert.user.name}}»,
+                отвечает на Ваши вопросы по теме «<a href="http://{{site}}/profi/content/expert/{{expert.id}}/">{{ expert.title }}</a>». <br></b>
+                <i>Выпуск «<a href="http://www.tourprom.ru/profi/content/expert/">ЭКСПЕРТА НЕДЕЛИ</a>» 
+                проходит  {% if expert.countries.all %} по направлению {% for country in expert.countries.all %}«{{country}}»{% if not forloop.last %}, {% endif %}{% endfor %}{% endif %},
+                и {% if expert.tourism_types.all %} затрагивает вид туризма {% for tourism in expert.tourism_types.all %}«{{tourism}}»{% if not forloop.last %}, {% endif %}{% endfor %}{% endif %}. </i>
+                <br>
+                {% ifequal mode "mail-preview" %}(<a href="/admin/advertisers/expert/{{expert.id}}/"><b>редактировать выпуск</b></a>){% endifequal %}
+
+                {{ expert.description|safe }}
+                
+                <font color="#FF0000">Количество заданных эксперту вопросов: {{ expert.questions.count }}</font><br>
+                <b><a href="http://{{site}}/profi/content/expert/{{expert.id}}/">=>>> ЗАДАЙ ВОПРОС ЭКСПЕРТУ =>>></a></b>
+                <br><br>
+            </td>
+        </tr>
+    <tr>
+        <td style="background-color: #cccccc; height: 1px;">
+            
+        </td>
+        <td width="50%">
+            
+        </td>
+    </tr>
+</table>
+{% endif %}
+
+{% if special_expert %}
+<br>
+<table cellpadding="0" cellspacing="0">
+    <tr  bgcolor="#F3F3F3">
+        <td colspan="2">
+            <h2 class="tit">НАРОД ЖЕЛАЕТ ЗНАТЬ!</h2>
+        </td>
+    </tr>
+    <tr>
+        <td style="background-color: #cccccc; height: 1px;" colspan="2">
+
+        </td>
+    </tr>
+        <tr>
+            <td colspan="2">
+                <b><font color="#0000FF">{{ special_expert.title }}</font></b>
+                <br>
+                <b>С {{ special_expert.pubdate|date:"d.m.Y" }} по {{ special_expert.enddate|date:"d.m.Y" }}
+                эксперт недели {{special_expert.expert_name}}, {{special_expert.expert_title}} компании «{{special_expert.user.name}}»,
+                отвечает на Ваши вопросы по теме «<a href="http://{{site}}/profi/content/expert/{{special_expert.id}}/">{{ special_expert.title }}</a>». <br></b>
+                <i>Выпуск «<a href="http://www.tourprom.ru/profi/content/expert/">ЭКСПЕРТА НЕДЕЛИ</a>»
+                проходит  {% if special_expert.countries.all %} по направлению {% for country in special_expert.countries.all %}«{{country}}»{% if not forloop.last %}, {% endif %}{% endfor %}{% endif %}
+                </i>
+                <br>
+                {% ifequal mode "mail-preview" %}(<a href="/admin/advertisers/expert/{{special_expert.id}}/"><b>редактировать выпуск</b></a>){% endifequal %}
+
+                {{ special_expert.description|safe }}
+
+                <font color="#FF0000">Количество заданных эксперту вопросов: {{ special_expert.questions.count }}</font><br>
+                <b><a href="http://{{site}}/profi/content/expert/{{special_expert.id}}/">=>>> ЗАДАЙ ВОПРОС ЭКСПЕРТУ =>>></a></b>
+                <br><br>
+            </td>
+        </tr>
+    <tr>
+        <td style="background-color: #cccccc; height: 1px;">
+
+        </td>
+        <td width="50%">
+
+        </td>
+    </tr>
+</table>
+{% endif %}

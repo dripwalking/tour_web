@@ -1,0 +1,118 @@
+{% extends "general/one_column.html" %}
+
+
+{% block footer %}
+    {% include "general/footer_business.html" %}
+{% endblock %}
+
+
+{% block title %} Подписка на бюллетень профессионалов турбизнеса «ТУРПРОМ»  {% endblock %}
+
+
+{% block content_center %}
+
+<div id="title_block">Подписка на бюллетень</div>
+
+<br>
+<b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b><b class="xb4"></b></b>
+<div class="head_top_content" style="text-align: left;">
+
+<table width="100%" border="0" cellpadding="5" cellspacing="5">
+  <tr valign="top"> 
+    <td>
+Электронная ежедневная газета (бюллетень) «ТУРПРОМ» создана специально для профессионалов туристического бизнеса.
+Каждый день с помощью бюллетеня мы информируем наших читателей о самых значимых новостях туризма в России
+и всего мира, а туроператоры доводят до аудитории свои новости и самые актуальные предложения по авиабилетам,
+турам, семинарам, рекламным турам и вакансиям по работе. <br>
+<ol>
+  <li>
+Бюллетень выходит ежедневно кроме выходных дней и праздников. </li> <li>
+Количество подписчиков бюллетеня превышает 25 тыс. e-mail адресов. </li> <li>
+Присоединяйтесь и Вы! (в любой момент от подписки можно отказаться)...</li> <li>
+Для более полноценной работы и общения со своими коллегами мы  рекомендуем <br> вам
+<a href="http://www.tourprom.ru/registration/">зарегистрироваться</a> в <a href="http://www.tourprom.ru/social/">Туристической Социальной Сети</a>
+в качестве професссионалов турбизнеса!
+</li>
+</ol>
+
+<table width="90%" border="0" align="center">
+  <tr>
+    <td>
+    <form action="" method="POST">
+
+<b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b><b class="xb4"></b></b>
+<div class="head_top_content" style="text-align: left;">
+
+<table width="100%" border="0" cellpadding="5" cellspacing="5">
+  <tr valign="top"> 
+    <td>
+Заполните небольшую анкету. После нажатия кнопки «Подписаться» вам на указанный электроадрес 
+придёт письмо <br> для активации подписки. Чтобы её активировать, перейдите по указанной в письме ссылке. 
+Спасибо за подписку! <br><br>
+
+    <table>
+        <tr bgcolor="#F3F3F3">
+            <td>{{ form.company.label }}*</td>
+            <td  width="400">{{ form.company }}</td>
+            <td  width="250">{{ form.company.errors }}</td>
+        </tr>
+        <tr>
+            <td>{{ form.city_choice.label }}*</td>
+            <td>{{ form.city_choice }}</td>
+            <td>{{ form.city_choice.errors }}</td>
+        </tr bgcolor="#F3F3F3">
+        <tr>
+            <td>Если город другой, то укажите его:</td>
+            <td>{{ form.city }}<br><br></td>
+            <td>{{ form.city.errors }}</td>
+        </tr>
+        <tr bgcolor="#F3F3F3">
+            <td>{{ form.company_type.label }}*</td>
+            <td>{{ form.company_type }}</td>
+            <td>{{ form.company_type.errors }}</td>
+        </tr>
+        <tr>
+            <td><b>{{ form.email.label }}</b>*<br>(адрес подписки)</td>
+            <td>{{ form.email }}</td>
+            <td>{{ form.email.errors }}</td>
+        </tr>
+        <tr bgcolor="#F3F3F3">
+            <td>{{ form.phone.label }}*</td>
+            <td>{{ form.phone }}</td>
+            <td>{{ form.phone.errors }}</td>
+        </tr>
+        <tr>
+            <td>{{ form.contact_person.label }}*</td>
+            <td>{{ form.contact_person }}</td>
+            <td>{{ form.contact_person.errors }}</td>
+        </tr>
+  <tr bgcolor="#F3F3F3"> 
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+    </table>
+
+</td>
+  </tr>
+</table>
+</div>
+<b class="xbottom"><b class="xb4"></b><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b><br>
+
+    <br>
+    <input type="submit" value="Подписаться на бюллетень «ТУРПРОМа»!">
+    </form>
+    </td>
+  </tr>
+</table>
+
+<br><br>
+</td>
+  </tr>
+</table>
+</div>
+<b class="xbottom"><b class="xb4"></b><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b><br><br>
+
+{% endblock %}
+
+

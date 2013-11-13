@@ -1,0 +1,33 @@
+<br>
+<table cellpadding="0" cellspacing="0">
+    <tr  bgcolor="#F3F3F3">
+        <td colspan="2">
+            <h2 class="tit">АКТУАЛЬНОЕ ИНТЕРВЬЮ</h2>
+        </td>
+    </tr>
+    <tr>
+        <td style="background-color: #cccccc; height: 1px;" colspan="2">
+
+        </td>
+    </tr>
+        <tr>
+            <td colspan="2">
+                <b>{{ interview.respondent }}:</b><br>
+                <b><font color="#0000FF"><a href="http://{{site}}/profi/content/interview/{{interview.id}}/">{{ interview.title }}</a></font></b>
+                <br>
+
+                {{ interview.description|safe }}
+
+                <font color="#FF0000">Полностью интервью вы можете прочитать <a href="http://{{site}}/profi/content/interview/{{interview.id}}/">по данной ссылке</a> на сайте ТУРПРОМа.</font><br>
+                <br><br>
+            </td>
+        </tr>
+    <tr>
+        <td style="background-color: #cccccc; height: 1px;">
+
+        </td>
+        <td width="50%">
+
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,36 @@
+{% extends "admin/base_site.html" %}
+
+{% block title %} Добавление подписок на Бюллетень {% endblock %}
+
+{% block javascript %}
+{{ block.super }}
+<script type="text/javascript" src="/site_media/js/jquery-1.3.2.min.js"></script>
+{% endblock %}
+
+
+{% block content %}
+<h1>Добавление подписок на Бюллетень</h1>
+<p>Добавьте список e-mail адресов, каждый e-mail в отдельной строчке</p>
+<table><tr>
+<td>
+<p>Добавление</p>
+<form method="POST" action="">
+<p>
+    <textarea name="emails" cols="50" rows="20"></textarea>
+    <input type="hidden" name="status" value="add">
+</p>
+<input type="submit" value="Добавть">
+</form>
+</td>
+<td>
+<p>Удаление</p>
+<form method="POST" action="">
+<p>
+    <textarea name="emails" cols="50" rows="20"></textarea>
+    <input type="hidden" name="status" value="delete">
+</p>
+<input type="submit" value="Удалить">
+</form>
+</td>
+</tr></table>
+{% endblock %}

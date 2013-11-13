@@ -1,0 +1,61 @@
+{% load publication_filters %}
+
+{% ifnotequal video_count 0 %}
+
+<table cellpadding="0" cellspacing="0" style="font-size: 0.9em;">
+    <tr  bgcolor="#F3F3F3">
+        <td colspan="2">
+            <h2 style="color: #050CD8;margin: 10px 10px 7px 10px;font-size: 1.2em;">ТУРПРОМ-ТВ </h2> {% ifequal mode "mail-preview" %} (<a target="_blank" href="/admin/tv/tv_to_bulletin/{{ pub_date|date:'Y-m-d' }}/">Добавить / удалить</a>){% endifequal %}
+        </td>
+    </tr>
+    <tr>
+        <td style="background-color: #cccccc; height: 1px;" colspan="2">
+        </td>
+    </tr>
+   {% for item in videos %}
+    <tr>
+        <td colspan="2">
+            <br>
+            «<a href="http://www.tourprom.ru/tv/show/{{item.id}}" target="_blank"><b>{{ item.title }}</b></a>»
+            <br><br>
+            <a href="http://www.tourprom.ru/tv/show/{{item.id}}" target="_blank"><img src="http://www.tourprom.ru/site_media/images/videopreview/{{item.id}}/archive.jpg" width="150" height="119" alt="{{ item.title }}" border="0"></a>
+            <br><br>
+            {% if item.bulletin_short %} &nbsp; {% else %}{{ item.description|striptags|truncate_chars:1000|safe }}{%endif%}
+            <br><br>
+            <a href="http://www.tourprom.ru/tv/show/{{item.id}}" target="_blank">Смотрите выпуск ТУРПРОМ-ТВ</a>
+            <br><br>
+        </td>
+    </tr>
+    <tr>
+        <td style="background-color: #cccccc; height: 1px;">
+
+        </td>
+        <td width="50%">
+
+        </td>
+    </tr>
+    <tr>
+        <td>
+            &nbsp;
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<br>
+{% else %}
+{% ifequal mode "mail-preview" %}
+
+<table cellpadding="0" cellspacing="0" style="font-size: 0.9em;">
+    <tr  bgcolor="#F3F3F3">
+        <td colspan="2">
+            <h2 style="color: #050CD8;margin: 10px 10px 7px 10px;font-size: 1.2em;">ТУРПРОМ-ТВ </h2> (<a target="_blank" href="/admin/tv/tv_to_bulletin/{{ pub_date|date:'Y-m-d' }}/">Добавить / удалить</a>)
+        </td>
+    </tr>
+    <tr>
+        <td style="background-color: #cccccc; height: 1px;" colspan="2">
+        </td>
+    </tr>
+</table>
+<br>
+{% endifequal %}
+{% endifnotequal %}
