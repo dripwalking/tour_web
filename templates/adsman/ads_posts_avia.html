@@ -1,0 +1,62 @@
+{% extends "adsman/ads_posts_tour.html" %}
+
+{% block main  %}
+
+{% if post.dept_date %}{{post.dept_date}}{% endif %}
+{% if post.avia_route_first and post.avia_route_2 and post.avia_route_last %}
+ <b>{{post.avia_route_2}}</b>,
+{% endif %}
+
+{% if post.avia_route_first and post.avia_route_2 and not post.avia_route_last %}
+ <b>{{post.avia_route_first}}->{{post.avia_route_2}}</b>,
+{% endif %}
+
+{% if not post.avia_route_first and post.avia_route_2 and post.avia_route_last %}
+ <b>{{post.avia_route_2}}->{{post.avia_route_last}}</b>,
+{% endif %}
+
+{% if post.date_from %}с {{post.date_from}}{% if post.date_to %} по {{post.date_to}}{% endif %}, {% endif %}
+
+{% if post.price %}
+<font color="#FF0000">{{post.price }} {{post.price_currency }}
+{% if post.price_class %}{{post.price_class}}{% endif %}{% if post.price_taxes %} + таксы{% endif %}</font>,
+{% endif %}
+
+{% if post.nights_avia %}
+ {% ifequal post.nights_avia '0' %}one way,{% endifequal %}
+ {% ifnotequal post.nights_avia '0' %}{{post.nights_avia}} н.,{% endifnotequal %}
+{% endif %}
+
+
+
+{% if post.aircompany %}
+{{post.aircompany}},
+{% endif %}
+{% if post.airport %}
+{{post.airport}},
+{% endif %}
+{% if post.dept_time %}
+в {{post.dept_time}},
+{% endif %}
+{% if post.flight %}
+рейс {{post.flight}},
+{% endif %}
+{% if post.aircraft %}
+{{post.aircraft}}.
+{% endif %}
+
+{% if post.days_of_week %}
+Далее по {{post.days_of_week}}.
+{% endif %}
+{% if post.add_condition %}
+Имеется {{post.add_condition}}.
+{% endif %}
+
+{% endblock  %}
+
+
+
+
+
+
+

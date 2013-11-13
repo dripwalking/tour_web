@@ -1,0 +1,93 @@
+{% extends "general/cabinet_adv.html" %}
+{% load profi %}
+
+{% block javascript %}
+<script type="text/javascript" src="/site_media/js/jquery-ui/ui.core.js"></script>
+<script type="text/javascript" src="/site_media/js/jquery-ui/ui.datepicker.js"></script>
+<script type="text/javascript" src="/site_media/js/jquery-ui/i18n/ui.datepicker-ru.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+
+    $(".calendar").datepicker({showOn: 'both', buttonImage: '/site_media/images/calendar.gif', buttonImageOnly: true}, $.datepicker.regional['ru']);
+
+    $("#bulletin_calendar").datepicker({
+        showOn: 'both',
+        buttonImage: '/site_media/images/calendar.gif',
+        buttonImageOnly: true,
+        onSelect: function(dateText, inst) {
+            var date = dateText.substring(0, 2) + "." + dateText.substring(3, 5) + "." + dateText.substring(6, 10);
+            $.post("/adspages/check_pub_date/", { date: date },
+                function(result){
+                    if(result=="") {
+                        //if($("#pub_date:contains('" + date + "')").size()){
+                        if($("#pub_date").val().indexOf(date)>-1) {
+                            $("#errors").html("Вы уже выбрали эту дату");
+                            colorDatepickerDates('message', dateText.substring(6, 10), dateText.substring(3, 5), inst, null);
+                            return;
+                        }
+                        $("#errors").html("");
+                        //$("#pub_date").append("\n" + date );
+                        if($("#pub_date").val()=='')
+                            $("#pub_date").val(date);
+                        else
+                            $("#pub_date").val($("#pub_date").val() + "\n" + date);
+                        $("#bulletin_calendar").hide();
+                    }
+                    else {
+                        $("#errors").html(result);
+                    }
+                    colorDatepickerDates('message', dateText.substring(6, 10), dateText.substring(3, 5), inst, null);
+            });
+        },
+        onChangeMonthYear: function(year, month, inst) { colorDatepickerDates('message', year, month, inst, null); },
+        beforeShow: function(input, inst) { colorDatepickerDates('message', null, null, inst, input); }
+    }, $.datepicker.regional['ru']);
+
+    $("#add_date_button").click(function(){
+        $("#bulletin_calendar").toggle();
+    });
+
+    $('body').click(function(e) {
+        if ($(e.target).closest('#add_date_button').length == 0 && $(e.target).closest('.ui-datepicker-calendar').length == 0 && $(e.target).closest('.ui-datepicker-header').length == 0)
+        {
+            $("#bulletin_calendar").hide();
+        }
+    });
+    
+});
+</script>
+{% endblock %}
+{% block css %}
+    <link type="text/css" href="/site_media/css/jquery-ui/ui.all.css" rel="stylesheet" />
+    <link type="text/css" href="/site_media/css/jquery-ui/jquery-ui.custom.css" rel="stylesheet" />
+    <style type="text/css">
+    select[name='avia_route_2'] {width: 186px;}
+    </style>
+{% endblock %}
+
+
+{% block content_center %}
+    <div class="ads-menu">
+        <span>[ <a href="/adspages/">Разместить объявления</a> (<span style="color:{% ifequal user.messages_quantity 0 %}#ff0000{% else %}#00aa00{% endifequal%}">{{ user.messages_quantity }}</span>) ]</span>
+        <span>[ <a href="/adspages/future/dates/">Редактировать объявления</a> (<span style="color:#00aa00">{{ user.future_messages }}</span>) ]</span>
+        <span>[ <a href="/adspages/past/dates/">Архив объявлений</a> ]</span><br/>
+        <span>[ <a href="/reklama/#1">Купить объявления</a> ]</span>
+        <span>[ <a href="/tradearea/">Посмотреть Торговую площадку - объявления на Бирже</a> ]</span>
+    </div>
+
+    {% block content_center_inner %}
+    <div>
+     {% include 'adsman/ads_page_core.html' %} 
+    </div>
+    {% endblock %}
+
+{% endblock %}
+
+{% block title %}Разместить объявления{% endblock %}
+
+{% block menu %}
+
+Созадать/редактировать объявление
+
+{% endblock %}
+

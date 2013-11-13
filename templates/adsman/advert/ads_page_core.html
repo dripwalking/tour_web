@@ -1,0 +1,303 @@
+{% load adsman_tags %}
+
+{% spaceless %}
+
+{% ifequal mode "admin" %}
+<a href="/admin/adspages/{{page.id}}/choose-control">Добавить компонент</a>
+<br>
+<a href="/admin/adspages/">Рубрики</a>
+{% endifequal %}
+
+
+{% ifequal mode "job" %}
+<b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b><b class="xb4"></b></b>
+<div class="head_top_content" style="text-align: left;">
+{% endifequal %}
+<table>
+
+{% ifequal mode "all-controls" %}
+ <b>Панель добавления компонента на страницу рубрики</b>
+ <br>
+{% endifequal %} 
+
+
+{% ifnotequal mode "service" %}
+<tr>
+  <td><b>Рубрика:</b></td><td><b>{{page.title}}</b></td>
+</tr>
+{% endifnotequal %}
+
+{% ifequal mode "default" %}
+  <form action="/advert/{{page.id}}/preview_post/" method="POST">
+{% endifequal %}
+
+{% ifequal mode "job" %}
+  <form action="/advert/{{page.id}}/preview_post/" method="POST">
+{% endifequal %}
+
+{% ifequal mode "edit-post" %}
+  <form action="/advert/posts/{{post.id}}/save/" method="POST">
+{% endifequal %}
+ 
+ {% for pcontrol in controls %}
+ <tr>
+   <td width="28%" valign="top">
+   {{pcontrol.control.caption}} 
+     {% if pcontrol.mandatory  %}*{% endif %}
+     {% if wrong  %}
+       {% ads_valid pcontrol.control.name wrong %}    
+     {% endif %}
+     
+   <br>
+    <i>{{pcontrol.control.hint}}</i> </td>
+   <td>
+     <!-- CONTROLS  --> 
+     {% ifequal pcontrol.control.type "price_avia" %}
+	     <input name="price" type="text" value="{{values.price}}" > 
+	       {% ads_select  "price_currency" "USD,EUR,RUB" "USD,EUR,RUB" values %}	        
+		   <br>
+	          {% ads_radio_group  "price_class" "эконом,премиум,бизнес,первый" "Эконом кл.,Премиум кл.,Бизнес кл.,Первый кл." values %}
+		   <br>
+	          {% ads_checkbox  "price_taxes" "yes" "+ таксы" values %}
+
+     {% endifequal %}
+     
+      {% ifequal pcontrol.control.type "salary" %}
+	    от <input name="salary_from" type="text" value="{{values.salary_from}}" > до
+	       <input name="salary_to" type="text" value="{{values.salary_to}}" >
+	       {% ads_select  "salary_currency" "USD,EUR,RUB" "USD,EUR,RUB" values %}	
+	       {% ads_checkbox  "salary_percents" "yes" "+ %" values %}        
+     {% endifequal %}
+     
+       {% ifequal pcontrol.control.type "comission" %}
+	     <input name="comission_value" type="text" value="{{values.comission_value}}" > 
+	       {% ads_select  "comission" "%,USD,EUR,RUB" "%,USD,EUR,RUB" values %}	        
+     {% endifequal %}
+     
+       {% ifequal pcontrol.control.type "price" %}
+	     <input name="price" type="text" value="{{values.price}}" > 
+	       {% ads_select  "price_currency" "USD,EUR,RUB" "USD,EUR,RUB" values %}	        
+
+     {% endifequal %}
+     
+      {% ifequal pcontrol.control.name "nights_avia" %}
+			{% ads_checkbox  "nights_avia" "0,1,2,3,4,5,6,7,8,9,10,11,12,13" "one way,1 н.,2 н.,3 н.,4 н.,5 н.,6 н.,7 н.,8 н.,9 н.,10 н.,11 н.,12 н.,13 н." values %}
+          <br>
+          {% ads_checkbox  "nights_avia" "14,15,16,17,18,19,20,21,22" "14 н.,15 н.,16 н.,17 н.,18 н.,19 н.,20 н.,21 н.,22 н." values %}
+   	
+     {% endifequal %}
+     
+     {% ifequal pcontrol.control.type "excursions" %}
+       {% ads_checkbox  "excursions" "да" "" values %}
+       <input name="excursions_add" type="text" value="{{values.excursions_add}}" MAXLENGTH="50"> 
+     {% endifequal %}
+     
+      {% ifequal pcontrol.control.type "days_of_week" %}
+       {% ads_checkbox  "days_of_week" "пн,вт,ср,чт,пт,сб,вс" "пн,вт,ср,чт,пт,сб,вс" values %}
+     {% endifequal %}
+     
+     {% ifequal pcontrol.control.type "checkbox" %}
+       {% ads_checkbox   pcontrol.control.name "да" "" values %}
+     {% endifequal %}
+  
+     
+     {% ifequal pcontrol.control.type "textbox" %}
+        {% ads_textbox pcontrol.control.name "" "" values %}
+     {% endifequal %}
+     
+     {% ifequal pcontrol.control.type "text" %}
+      {% ads_textarea pcontrol.control.name "" "" values %}
+     {% endifequal %}
+     
+     {% ifequal pcontrol.control.type "aircraft" %}
+      {% ads_aircraft pcontrol.control.name "" "" values %}
+     {% endifequal %}
+     
+    {% ifequal pcontrol.control.type "airport" %}
+      {% ads_airport pcontrol.control.name "" "" values %}
+     {% endifequal %}
+     
+    {% ifequal pcontrol.control.type "aircompany" %}
+      {% ads_aircompany pcontrol.control.name "" "" values %}
+     {% endifequal %}
+     
+     {% ifequal pcontrol.control.type "calendar" %}
+        {% ads_calendar pcontrol.control.name "" "" values %}
+     {% endifequal %}
+     
+     
+{% ifnotequal mode "service" %}
+     {% ifequal pcontrol.control.type "pub_date" %}
+<table>
+<tr><td>
+<b>Выбранные даты публикации:</b>
+</td></tr>
+<tr><td>
+    {% ifequal mode "edit-post" %}
+        {{ post.publish_date|date:"d.m.Y" }}
+        <div style="display: none;">
+            {% ads_textarea pcontrol.control.name "" "" values %}
+        </div>
+    {% else %}
+    <font color="#FF0000"><span id="errors"></span></font>
+    <br>
+    <div style="float:left;">
+        {% ads_textarea pcontrol.control.name "" "" values %}
+    </div>
+    <div style="float:left;">
+        <input type="button" value="+" id="add_date_button"/>
+    </div>
+    <div style="float:left;overflow:hidden;">
+        <div id="bulletin_calendar" style="display:none;position:absolute;">
+        </div>
+    </div>
+    {% endifequal %}
+    
+</td></tr>
+</table>
+     {% endifequal %}
+     
+{% endifnotequal %}
+
+     
+     
+     {% ifequal pcontrol.control.type "listbox" %}
+        {% ads_select  pcontrol.control.name pcontrol.control.value pcontrol.control.value values %}
+     {% endifequal %}
+     
+     {% ifequal pcontrol.control.type "phone" %}
+       {% ads_phone pcontrol.control.name "_on" "многоканальный" values %}
+     {% endifequal %}
+     
+     {% ifequal pcontrol.control.type "country" %}
+       {% ads_country pcontrol.control.name "" "" values %}
+     {% endifequal %}
+
+       {% ifequal pcontrol.control.type "cruise_company" %}
+           {% ads_cruise_company pcontrol.control.name "" "" values %}
+       {% endifequal %}
+
+       {% ifequal pcontrol.control.type "cruise_ship" %}
+           {% ads_cruise_ship pcontrol.control.name "" "" values %}
+       {% endifequal %}
+
+       {% ifequal pcontrol.control.type "travel_start" %}
+     {% ads_radio_group  "travel_start" "Москва,Другой город" "Москва,Другой город" values %}
+		   <br>
+		   <input name="travel_start_add" type="text" value="{{values.travel_start_add}}" >
+     {% endifequal %}
+     
+     {% ifequal pcontrol.control.type "ads_route" %}
+       {% ads_route  pcontrol.control.name values %}
+     {% endifequal %}
+     
+     
+   
+   </td>
+   
+   {% ifequal mode "admin" %}
+    <td>
+      {{pcontrol.position}}   
+   </td> 
+   
+   <td>
+      <a href="/admin/adspages/{{page.id}}/mandatory/{{pcontrol.id}}/">
+      {% if pcontrol.mandatory %}Сд. необяз.{% else %}Сд. обяз.{% endif%}
+      </a>     
+   </td> 
+   
+   <td>
+      <a href="/admin/adspages/{{page.id}}/remove-control/{{pcontrol.id}}/">Удалить</a>     
+   </td> 
+   
+   <td>
+    <form action="/admin/adspages/{{page.id}}/move-to/{{pcontrol.id}}/" method="POST">
+    	<input type="text" size="2" value="" name="position">
+    	<input type="submit" value="Д" name="move">
+    </form>
+   </td>
+     {% if not forloop.first  %} 
+   <td>
+      <a href="/admin/adspages/{{page.id}}/up-control/{{pcontrol.id}}/">Вверх</a>     
+   </td> 
+      {% else %}
+      <td></td>
+      {% endif %}
+      {% if not forloop.last  %} 
+   <td>
+      <a href="/admin/adspages/{{page.id}}/down-control/{{pcontrol.id}}/">Вниз</a>     
+   </td> 
+      {% else %}
+      <td></td>
+      {% endif %}
+   {% endifequal %} 
+
+   {% ifequal mode "all-controls" %}
+   <td>
+      <a href="/admin/adspages/{{page.id}}/add-control/{{pcontrol.control.id}}/">Выбрать компонент</a>
+   </td>
+   {% endifequal %}   
+ </tr>
+ {% endfor %}
+
+
+<br />
+
+
+{% ifequal mode "default" %}
+<tr>
+ <td>
+ </td>
+ <td>
+  <input type="submit" value="Предпросмотр" name="new">
+ </td>
+ </tr>
+   
+ </form>
+{% endifequal %}
+
+{% ifequal mode "job" %}
+<tr>
+ <td>
+ </td>
+ <td>
+  <input type="submit" value="Предпросмотр" name="new">
+ </td>
+ </tr>
+   
+ </form>
+{% endifequal %}
+
+{% ifequal mode "edit-post" %}
+<tr>
+ <td>
+ </td>
+ <td>
+  <input type="hidden" name="return_page" value="{{return}}" >
+  <input type="submit" value="Сохранить изменения" name="update">
+  </td>
+ </tr>
+ </form>
+{% endifequal %}
+
+{% ifequal mode "admin" %}
+<tr>
+ <td>
+ </td>
+ <td>
+<a href="/admin/adspages/{{page.id}}/choose-control">Добавить компонент</a>
+<br>
+<a href="/admin/adspages/">Рубрики</a>
+ </td>
+ </tr>
+{% endifequal %}
+
+</table>
+
+{% ifequal mode "job" %}
+</div>
+<b class="xbottom"><b class="xb4"></b><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b> <br>
+
+{% endifequal %}
+
+{% endspaceless %}

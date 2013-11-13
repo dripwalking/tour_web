@@ -1,0 +1,78 @@
+{% extends "general/one_column.html" %}
+
+{% load adsman_tags %}
+
+{% block content_center %}
+
+<p>&nbsp;</p>
+
+<b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b><b class="xb4"></b></b>
+<div class="head_top_content" style="text-align: left;">
+<table width="930" border="0" cellpadding="5" cellspacing="5">
+  <tr valign="top"> 
+    <td>
+
+<div id="title_block" style="text-align: center;">Моя корзина отобранных объявлений</div><br>
+						  
+<noindex>
+<div>
+
+    <div>
+    {% for f in favorites %}
+    {% with f.post as entry %}
+        {% ifchanged entry.page %}
+        <h3>{% if entry.page.parent %}{{entry.page.parent.title}} - {% endif %}{{entry.page.title}}</h3>
+        {% endifchanged %}
+        <div class="tradearea-row odd" id="message_{{entry.id}}">
+            {{entry.html}}
+            <br>
+            <a class="dotted-link tradearea-remove-favorites" href="/tradearea/remove_from_favorites/{{entry.id}}/">Удалить из корзины</a>        
+        </div>
+    {% endwith %}
+    {% endfor %}
+    </div>
+    
+    <hr>
+    Инфогруппа «Турпром» не несет ответственность за содержание и достоверность рекламной информации и объявлений. 
+    Мнение редакции может не совпадать с мнением наших авторов.
+    <hr>
+
+ </div>
+</noindex>
+</div>
+
+</td>
+  </tr>
+</table>
+</div>
+<b class="xbottom"><b class="xb4"></b><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b><br><br>
+
+ {% endblock %}
+
+
+
+ {% block breadcomb %}
+
+<a href="/">Главная</a> / <a href="/tradearea/">Торговая площадка: актуальные туры и авиабилеты от туроператоров</a> / Моя корзина
+
+{% endblock %}
+
+ {% block title %}
+ Торговая площадка туррынка: горящие туры и горящие авиабилеты | Турпром
+{% endblock %}
+
+
+{% block meta_name %}
+<meta name="keywords" content="горящие путевки, горящие туры, горящие авиабилеты"> 
+<meta name="description" content="Горящие туры, горящие путевки, горящие авиабилеты на торговой площадке туроператоров | Турпром">
+{% endblock %}
+
+
+{% block javascript %}
+    <script type="text/javascript" src="/site_media/js/menu_site_bus.js"></script>
+{% endblock %}
+{% block css %}
+{% endblock %}
+{% block footer %}
+    {% include "general/footer_business.html" %}
+{% endblock %}

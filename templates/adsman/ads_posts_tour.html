@@ -1,0 +1,127 @@
+{% for post in posts %}
+
+{% ifequal mode "mail-preview" %}
+  <a href="/adspages/posts/{{post.id}}/edit/">Редактировать </a>
+{% endifequal %}
+
+{% ifequal mode "site" %}
+<div class="tradearea-row {% cycle 'odd' 'even' %}" id="message_{{post.id}}"> 
+{% endifequal %}
+
+{% block main  %}
+ 
+{% if post.tour_start %}{{post.tour_start}}{% endif %}
+{% if post.country %} <b>{{post.country}}</b>{% endif %}
+{% if post.resort %}&lt;{{post.resort}}&gt;{% endif %}
+{% if post.travel_start_add %}
+{% ifnotequal post.travel_start_add "" %}{% ifnotequal post.travel_start_add "Москва" %}<font color="#00DD00"> [из г.{{post.travel_start_add}}]</font>,{% endifnotequal %}{% endifnotequal %}
+{% endif %}
+{% if post.marshrut %}, маршрут {{post.marshrut}}{% endif %}
+{% if post.cruise_ship %}в круизе {% endif %}
+{% if post.program_name %}"{{post.program_name}}"{% endif %}
+{% if post.cruise_ship %}на лайнере "{{post.cruise_ship}}" {% endif %}
+{% if post.cruise_company %}({{post.cruise_company}}).{% endif %}
+{% if post.dop_info_cruise %} {{post.dop_info_cruise}}.{% endif %}
+{% if post.dop_info %}({{post.dop_info}}){% endif %}
+{% if post.price %}<font color="#FF0000">{{post.price }} {{post.price_currency }}</font>,{% endif %}
+{% if post.nights %}{{post.nights}} н.,{% endif %}
+{% if post.spo %} SPO {{post.spo}},
+{% endif %}
+{% if post.hotel_category %}
+{{post.hotel_category}},
+{% endif %}
+{% if post.hotel_name %}
+{{post.hotel_name}},
+{% endif %}
+{% if post.room_type %}
+{{post.room_type}},
+{% endif %}
+{% if post.pansion %}
+{{post.pansion}},
+{% endif %}
+{% if post.visa %}
+виза,
+{% endif %}
+{% if post.perelet %}
+авиаперелет,
+{% endif %}
+{% if post.insurance %}
+страховка,
+{% endif %}
+{% if post.transfer %}
+трансфер,
+{% endif %}
+{% if post.excursions %}экск.{% if post.excursions_add %}({{post.excursions_add}}){% endif %},{% endif %}
+{% if post.ent_program %}
+развл. программа,
+{% endif %}
+{% if post.aircompany %}
+{{post.aircompany}},
+{% endif %}
+{% if post.airport %}
+{{post.airport}},
+{% endif %}
+{% if post.dept_time %}
+в {{post.dept_time}},
+{% endif %}
+{% if post.flight %}
+рейс {{post.flight}},
+{% endif %}
+{% if post.aircraft %}{{post.aircraft}}{% endif %}{% if post.tour_start %}.{% endif %}
+{% if post.comission_value %}
+<font color="#009900">Ком. {{post.comission_value}} {{post.comission}}.</font>
+{% endif %}
+{% if post.days_of_week %}
+Далее по {{post.days_of_week}}.
+{% endif %}
+{% if post.add_condition %}
+ {{post.add_condition}}.
+{% endif %}
+{% endblock  %}
+
+{% block sender  %}
+<a href="http://www.tourprom.ru/company/{{post.sender_id}}/">{{post.sender }}</a>
+{% endblock  %}
+
+
+{% block contact  %}
+т. {{post.test_phone }}{% if post.test_phone_mc %} (многокан.){% endif %}{% if post.phone2 %}, {{post.phone2}}{% if post.phone2_mc %} (многокан.){% endif %}{% endif %}{% if post.phone3 %} ,{{post.phone3}}{% if post.phone3_mc %} (многокан.){% endif %}{% endif %}.
+{% if post.fax %}ф.{{post.fax}}.{% endif %}
+{% if post.email %}
+<a href="mailto:{{post.email}}"><span style="color:#888;">{{post.email}}</span>.</a>
+{% endif %}
+{% if post.web_site %}
+<noindex> <a href="{{post.web_site}}" rel="nofollow"><span style="color: #888;">{{post.web_site}}</span>.</a> </noindex>
+{% endif %}
+{% if post.icq %}
+Icq {{post.icq}}.
+{% endif %}
+{% endblock  %}
+{% if is_search %} <span style="color:#44aadd;">(опубликовано {{post.pub_date}})</span>{% endif %}
+
+{% ifequal mode "site" %}
+    {% if post.is_new %}<span style="color:#0000FF;font-weight:bold;">new</span>{% endif %}
+    <br>
+    {% if post.country %}
+    <a class="dotted-link tradearea-compare" href="/tradearea/tour/?country={{post.country}}#messages">Сравнить</a>
+    {% endif %}
+    {% if post.avia_route_2 %}
+    <a class="dotted-link tradearea-compare" href="/tradearea/avia/?airport={{post.avia_route_2}}#messages">Сравнить</a>
+    {% endif %}
+    <a class="dotted-link tradearea-add-favorites" href="/tradearea/add_to_favorites/{{post.id}}/">Отобрать в корзину</a>
+{% endifequal %}
+
+{% ifequal mode "site" %}
+</div>
+{% else %}
+    {% ifnotequal mode "simple" %}
+    <hr>
+    {% endifnotequal %}
+{% endifequal %}
+
+{% endfor %}
+
+
+
+
+

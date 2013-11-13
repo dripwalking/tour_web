@@ -1,0 +1,81 @@
+{% extends "admin/base_site.html" %}
+
+{% block title %} Рубрики объявлений {% endblock %}
+
+
+{% block content %}
+<caption>Рубрики объявлений</caption>
+
+
+<table>
+
+{% for section  in pages %}
+<tr>
+    <td>
+      <b> --- {{ section.title }} </b>
+ 	</td> 	
+ 	<td> 
+ 	</td>
+ </tr>
+  {% for page in section.children.all %}
+ <tr>
+    <td>
+ 		<b>{{ page.title }} </b>
+ 	</td> 	
+ 	<td>
+ 	 <a href="/admin/adspages/{{page.id}}/remove">Удалить</a>
+ 	</td> 	
+ 	<td>
+ 		<a href="/admin/adspages/{{page.id}}/">Редактировать</a> 
+ 	</td> 
+ </tr>
+   {% endfor %}
+ 
+{% endfor %}
+</table>
+
+<b>Создать рубрику</b>
+<form method="POST" action="/admin/adspages/new">
+<table>
+
+<tr>
+ <td>Название </td>
+ <td>Категория </td>
+ <td>Скопировать из </td>
+ <td> </td>
+</tr>
+
+<tr>
+ <td>
+	<input type="text" name="title"/>
+ </td>
+  <td>
+	<select name="parent">
+	   <option value="0">---</option>
+	  {% for page in pages %}
+	     <option value="{{page.id}}">{{ page.title }}</option>
+	  {% endfor %}
+	</select>
+ </td>
+ 
+ <td>
+	<select name="template">
+	   <option value="0">---</option>
+	  {% for section  in pages %}
+	     {% for page in section.children.all %}
+	   		<option value="{{page.id}}">{{ section.title }}-{{ page.title }}</option>
+	   	 {% endfor %}
+	  {% endfor %}
+	</select>
+ </td>
+ <td>
+	<input type="submit" value="Новая рубрика" name="new">
+ </td>	
+</tr>
+
+</table>
+
+</form>
+
+
+{% endblock %}

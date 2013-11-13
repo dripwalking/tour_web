@@ -1,0 +1,26 @@
+{% extends "general/two_column_left_menu.html" %}
+{% block content_center %}
+
+{% ifequal mode "error" %}
+Произошла ошибка размещения объявления.
+<table>
+ <tr>
+  <td>Дата публикации</td>
+  <td>{{post_date}}</td>
+ </tr>
+ 
+ <tr>
+  <td>Срок публикаций</td>
+  <td>{{expire_date}}</td>
+ </tr>
+</table>
+ 
+{% else %}
+
+Объявление успешно размещено
+<br><br>
+<a href="/adspages/">Рубрики</a>
+
+{% endifequal %}
+
+{% endblock %}

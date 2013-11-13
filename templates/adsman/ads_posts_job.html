@@ -1,0 +1,59 @@
+{% extends "adsman/ads_posts_tour.html" %}
+
+{% block main  %}
+
+{% if post.vac_position_add %}
+<b>{{post.vac_position_add}}</b>.
+{% else %}
+{% if post.vac_position %}
+<b>{{post.vac_position}}</b>.
+{% endif %}
+{% endif %}
+
+{% if post.salary_from and post.salary_to  %}
+<font color="#FF0000">От {{post.salary_from}} до {{post.salary_to}} {% if post.salary_currency %}{{post.salary_currency}}{% endif %} {% if post.salary_percents %} + %{% endif %}.</font>
+{% endif %}
+
+{% if not post.salary_from and post.salary_to  %}
+<font color="#FF0000">{{post.salary_to}} {% if post.salary_currency %}{{post.salary_currency}}{% endif %} {% if post.salary_percents %} + %{% endif %}.</font>
+{% endif %}
+
+{% if  post.salary_from and not post.salary_to  %}
+<font color="#FF0000">{{post.salary_from}} {% if post.salary_currency %}{{post.salary_currency}}{% endif %} {% if post.salary_percents %} + %{% endif %}.</font>
+{% endif %}
+
+{% if post.vac_experience %}
+Опыт работы в туризме - {{post.vac_experience}}.
+{% endif %}
+
+{% if post.vac_age_from or post.vac_age_to  %}
+Возраст - {% if post.vac_age_from %}от {{post.vac_age_from}}{% endif %} {% if post.vac_age_to %}до {{post.vac_age_to}}{% endif %}.
+{% endif %}
+
+{% if post.education %}
+Образование -  {{post.education}}.
+{% endif %}
+
+{% if post.gender %}
+Пол -  {{post.gender}}.
+{% endif %}
+
+{% if post.work_hour %}
+График работы - {{post.work_hour}}.
+{% endif %}
+
+{% if post.vac_reqs %}
+{{post.vac_reqs}}.
+{% endif %}
+
+{% if post.vac_company %}
+Компания {{post.vac_company}}.
+{% endif %}
+
+{% if post.vac_contact_person %}
+{{post.vac_contact_person}}.
+{% endif %}
+
+{% endblock  %}
+
+{% block sender  %}{% endblock  %}

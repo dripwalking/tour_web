@@ -1,0 +1,102 @@
+{% extends "general/cabinet_adv.html" %}
+{% load profi %}
+{% load adsman_tags %}
+
+{% block javascript %}
+<script type="text/javascript" src="/site_media/js/jquery-ui/ui.core.js"></script>
+<script type="text/javascript" src="/site_media/js/jquery-ui/ui.datepicker.js"></script>
+<script type="text/javascript" src="/site_media/js/jquery-ui/i18n/ui.datepicker-ru.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+    $(".calendar").datepicker({showOn: 'both', buttonImage: '/site_media/images/calendar.gif', buttonImageOnly: true}, $.datepicker.regional['ru']);
+
+    $("#bulletin_calendar").datepicker({
+        showOn: 'both',
+        buttonImage: '/site_media/images/calendar.gif',
+        buttonImageOnly: true,
+        onSelect: function(dateText, inst) {
+            var date = dateText.substring(0, 2) + "." + dateText.substring(3, 5) + "." + dateText.substring(6, 10);
+            $.post("/adspages/check_pub_date/", { date: date },
+                function(result){
+                    if(result=="") {
+                        //if($("#pub_date:contains('" + date + "')").size()){
+                        if($("#pub_date").val().indexOf(date)>-1) {
+                            $("#errors").html("Вы уже выбрали эту дату");
+                            return;
+                        }
+                        $("#errors").html("");
+                        //$("#pub_date").append("\n" + date );
+                        $("#pub_date").val($("#pub_date").val() + "\n" + date );
+                        $("#bulletin_calendar").hide();
+                    }
+                    else {
+                        $("#errors").html(result);
+                    }
+            });
+        }
+    }, $.datepicker.regional['ru']);
+
+    $("#add_date_button").click(function(){
+        $("#bulletin_calendar").toggle();
+    });
+
+    $('body').click(function(e) {
+        if ($(e.target).closest('#add_date_button').length == 0 && $(e.target).closest('.ui-datepicker-calendar').length == 0 && $(e.target).closest('.ui-datepicker-header').length == 0)
+        {
+            $("#bulletin_calendar").hide();
+        }
+    });
+
+});
+
+</script>
+{% endblock %}
+{% block css %}
+    <link type="text/css" href="/site_media/css/jquery-ui/ui.all.css" rel="stylesheet" />
+    <link type="text/css" href="/site_media/css/jquery-ui/jquery-ui.custom.css" rel="stylesheet" />
+{% endblock %}
+
+
+{% block content_center %}
+<table>
+<tr>
+   <td width="28%">
+        Даты публикации в бюллетене
+       <br><i>Даты пишутся отдельной строкой в формате  ДД.ММ.ГГГГ</i>
+   </td>
+   <td>
+       <!-- CONTROLS  -->
+ <table>
+<tr><td>
+<b>Выбранные даты публикации:</b>
+</td></tr>
+<tr><td>
+<font color="#FF0000"><span id="errors"></span></font>
+<br>
+    <div style="float:left;">
+    <textarea id="pub_date"  name="pub_date" rows="6" cols="20" class="" >{% now "d.m.Y" %}</textarea>
+    </div>
+    <div style="float:left;" class="calendar_area">
+        <input type="button" value="+" id="add_date_button"/>
+    </div>
+    <div style="float:left;overflow:hidden;" class="calendar_area">
+        <div id="bulletin_calendar" style="display:none;position:absolute;">
+        </div>
+    </div>
+</td></tr>
+</table>
+
+   </td>
+</tr>
+</table>
+{% endblock %}
+
+{% block title %}Разместить объявления{% endblock %}
+
+{% block menu %}
+
+<a href="../">Разместить объявления</a> / Объявление
+
+{% endblock %}

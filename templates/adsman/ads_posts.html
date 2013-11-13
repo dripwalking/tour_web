@@ -1,0 +1,17 @@
+<table>   
+{% for post in posts %}
+
+ <tr>
+     <td>
+   {% for key, value in post.items %}
+     {{key}} : {{value}},
+   {% endfor %}    
+      </td>
+   </tr> 
+ 
+{% endfor %}
+
+</table>  
+
+<br><br>
+<a href="/adspages/">Рубрики</a>

@@ -1,0 +1,47 @@
+{% extends "adsman/ads_page.html" %}
+
+{% block content_center_inner %}
+
+  <form action="/adspages/posts/{{post_id}}/copy/" method="POST">
+<table>
+<tr><td>
+
+</td></tr>
+<tr><td>
+<b>Выберете даты публикации для копирования:</b>
+</td></tr>
+<tr><td>
+<font color="#FF0000"><span id="errors"></span></font>
+<br>
+    <div style="float:left;">
+        <textarea id="pub_date" name="pub_date" rows="7" cols="10"  ></textarea>
+    </div>
+    <div style="float:left;">
+        <input type="button" value="+" id="add_date_button"/>
+    </div>
+    <div style="float:left;overflow:hidden;">
+        <div id="bulletin_calendar" style="display:none;position:absolute;">
+        </div>
+    </div>
+</td></tr>
+
+ 
+ 
+  <tr>
+    <td><input type="submit" value="Скопировать" name="new"></td>
+   </tr>
+   
+  </table>  
+  
+   <input type="hidden" name="url" value="{{url}}">
+  
+  </form>
+
+ {% endblock %}
+ 
+ {% block menu %}
+
+Копирование объявления
+
+{% endblock %}
+ 

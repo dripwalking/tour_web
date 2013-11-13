@@ -1,0 +1,102 @@
+{% extends "general/cabinet_adv.html" %}
+{% load adsman_tags %}
+
+{% block content_center %}
+
+<div class="ads-menu">
+    <span>[ <a href="/adspages/">Разместить объявления</a> (<span style="color:{% ifequal user.messages_quantity 0 %}#ff0000{% else %}#00aa00{% endifequal%}">{{ user.messages_quantity }}</span>) ]</span>
+    <span>[ {% ifnotequal mode "future" %}<a href="/adspages/future/dates/">{% endifnotequal %}Редактировать объявления{% ifnotequal mode "future" %}</a>{% endifnotequal %} (<span style="color:#00aa00">{{ user.future_messages }}</span>) ]</span>
+    <span>[ {% ifnotequal mode "past" %}<a href="/adspages/past/dates/">{% endifnotequal %}Архив объявлений{% ifnotequal mode "past" %}</a>{% endifnotequal %} ]</span>
+    <br/>
+    <span>[ <a href="/reklama/#1">Купить объявления</a> ]</span>
+    <span>[ <a href="/tradearea/">Посмотреть Торговую площадку - объявления на Бирже</a> ]</span>
+</div>
+
+ {% ifequal mode "past" %}
+ 
+   <div>
+			 <p>Чтобы просмотреть другие ваши публикации <br />
+					 <span style="color: #ff0000; font-weight: bold;">ВЫБЕРИТЕ НУЖНЫЙ МЕСЯЦ</span>
+					</p>
+
+    {% ads_select  "month" "1,2,3,4,5,6,7,8,9,10,11,12" "Январь,Февраль,Март,Апрель,Май,Июнь,Июль,Август,Сентябрь,Октябрь,Ноябрь,Декабрь" defaults %}
+
+    {% ads_select  "year" years years defaults %}
+    
+    <input type="submit" 
+    onClick="window.location =  '/adspages/past/dates/' +  document.getElementById('month').value + '.' + document.getElementById('year').value; "
+	name="Button1" value="Выбрать" id="Button1" />
+    
+    <span style="margin-left: 50px;">[<a href="/adspages/future/dates/" style="color:#ff0000;">Редактировать скопированные</a>]</span>
+    
+	</div>
+ 
+ 
+ {% endifequal %}
+
+<table border="0" cellspacing="2" cellpadding="2">
+{% for entry in container %}
+ <tr>
+ 
+{% ifchanged entry.post.publish_date %}
+
+{% ifequal mode "future" %}<td colspan="4">{% endifequal %}
+{% ifnotequal mode "future" %}<td colspan="3">{% endifnotequal %}
+	<div class="title_block_light"> <font color="#DD0000">
+	 {{entry.post.publish_date|date:"d.m.Y"}}
+	 </font>
+	 </div> </td>
+	 </tr>
+	 
+            <tr> 
+              {% ifequal mode "future" %}<td colspan="4">{% endifequal %}
+              {% ifnotequal mode "future" %}<td colspan="3">{% endifnotequal %}
+            <b>
+               <div class="title_block">{% if entry.post.page.parent %} {{entry.post.page.parent.title}} / {% endif %} {{entry.post.page.title}}</div>
+            </b>
+            </td>
+            </tr>
+{% else %}
+     {% ifchanged entry.post.page.id %}
+             <tr> 
+              {% ifequal mode "future" %}<td colspan="4">{% endifequal %}
+              {% ifnotequal mode "future" %}<td colspan="3">{% endifnotequal %}
+            <b>
+               <div class="title_block">{% if entry.post.page.parent %} {{entry.post.page.parent.title}} / {% endif %} {{entry.post.page.title}}</div>
+            </b>
+            </td>
+             </tr>
+     {% endifchanged %}            
+{% endifchanged %} 	 
+   
+ 
+ <tr>
+   <td> {{entry.html}}</td>
+   <td><a href="/adspages/posts/{{entry.post.id}}/copy-form/">Копировать</td>
+   <td><a href="/adspages/posts/{{entry.post.id}}/f-edit/">Редактировать</td>
+   {% ifequal mode "future" %}
+   <td><a href="#" onClick="if(confirm('Вы уверены?')) {window.location =  '/adspages/posts/{{entry.post.id}}/delete/';  }">Удалить</td>
+   {% endifequal %}
+ </tr>
+ 
+{% endfor %}
+		 <tr> 
+		  <td colspan="4">
+			<b>
+			Всего объявлений: {{ container|length }}
+			</b>
+		  </td>
+		 </tr>
+</table>
+
+ {% endblock %}
+
+{% block title %}{% ifequal mode "past" %} Архив объявлений{% else %}Неопубликованные{% endifequal %}
+{% endblock %}
+
+{% block menu %}
+{% ifequal mode "past" %}Архив объявлений{% else %}Неопубликованные{% endifequal %}
+{% endblock %}
+
+
+

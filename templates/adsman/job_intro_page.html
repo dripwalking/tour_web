@@ -1,0 +1,175 @@
+{% extends "general/two_column_right_menu.html" %}
+
+{% block title %}Работа в туризме: объявления о вакансиях и резюме | Турпром{% endblock %}
+
+{% block meta_name %}
+<meta name="keywords" content="работа в туризме, вакансии турфирм, менеджер по туризму"> 
+<meta name="description" content="Как быстро найти работу в туризме - в туроператоре, турагентстве либо в отеле? Это просто: на портале «ТУРПРОМ» каждый ищущий работу в туризме может АБСОЛЮТНО БЕСПЛАТНО разместить своё резюме! ">
+{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript" src="/site_media/js/menu_site_bus.js"></script>
+     <script>
+    function addToJBasket(id){
+    if ($("#j_" + id).attr("checked") == true) {
+      url = "/job/store/" + id
+    } else {
+      url = "/job/remove/" + id
+    }
+    $.ajax({
+        type: "GET",
+        url: url,
+        success: function(result){
+            $("#basketSize").html(result);
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            //alert(xhr.status);
+            //alert(thrownError);
+        }
+    });
+}
+    </script>
+{% endblock %}
+
+{% block footer %}
+    {% include "general/footer_business.html" %}
+{% endblock %}
+
+{% block breadcomb %}
+<a href="/">Главная</a> / Работа в туризме
+<p>&nbsp;</p>
+{% endblock %}
+
+{% block content_center %}
+
+<p></p>
+
+<div id="title_block"><h1 style="padding:2px; margin:0;">Работа в туризме</h1></div><br>
+
+<b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b><b class="xb4"></b></b>
+<div class="head_top_content" style="text-align: left;">
+
+<table width="100%" border="0" cellspacing="5" cellpadding="5">
+  <tr>
+    <td>
+Как быстро найти <strong>работу в туризме</strong> - в туроператоре, турагентстве либо в отеле? Это просто: на портале  «ТУРПРОМ» каждый 
+ищущий работу в туризме может АБСОЛЮТНО БЕСПЛАТНО разместить 
+своё резюме! Просто перейдите в раздел «<a href="/job/cv/">Резюме</a>», нажмите кнопку 
+«Разместить новое резюме» и заполните нужные поля. О вашем резюме узнают во всех турфирмах России - помимо этого раздела оно разошлётся вместе с нашим бюллетенем по 35 тыс подписчиков! 
+<br><b>Наш совет: чем чаще вы размещаете объявления о <strong>работе в туризме</strong> – тем выше шанс найти наиболее приемлемое предложение! 
+Мы рекомендуем это делать ежедневно в течение как минимум одной-двух недель.</b>
+<br><br>
+Туроператорам, турагентствам и отелям также легко и просто проинформировать соискателей о своих вакансиях: в разделе <a href="/job/vacancy/">Вакансии</a> нажмите кнопку «Разместить новую вакансию», заполните нужные поля и ваше предложение для соискателей будет немедленно опубликовано в разделе "Работа в туризме", причём АБСОЛЮТНО БЕСПЛАТНО. Однако, если вы хотите, чтобы оно попало не только на портал, но и в бюллетень (который рассылается по e-mail по 35 тысячам подписчиков), а на портале выделялось бы особым образом, то объявление надо размещать через свой «личный кабинет», и такие объявления являются платными.
+
+
+<br>
+
+</td>
+  </tr>
+</table>
+
+<table width="60%" border="0" cellspacing="5" cellpadding="5"  align="center">
+  <tr> 
+    <td> 
+      <div align="center">
+
+<b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b><b class="xb4"></b></b>
+<div class="head_top_content" style="text-align: center;">
+ <a href="/job/vacancy/">ВАКАНСИИ: <br> просмотр и добавление</a>
+</div>
+<b class="xbottom"><b class="xb4"></b><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b><br><br>
+</div>
+    </td>
+    <td> 
+      <div align="center">
+<b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b><b class="xb4"></b></b>
+<div class="head_top_content" style="text-align: center;">
+<a href="/job/cv/">РЕЗЮМЕ: <br> просмотр и добавление</a>
+</div>
+<b class="xbottom"><b class="xb4"></b><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b><br><br>
+</div>
+    </td>
+  </tr>
+</table>
+
+
+
+
+<div style="margin-left:10px;">
+<a href="/job/basket/"><img src="/site_media/images/basket.gif"></a><br>
+ <a href="/job/basket/">Моя корзина (<b id="basketSize">{{basket_size}}</b>)</a>
+
+</div>
+
+
+
+ 
+</div>
+
+
+
+<b class="xbottom"><b class="xb4"></b><b class="xb3"></b><b class="xb2"></b><b class="xb1"></b></b><br><br>
+
+<div id="title_block">Вакансии дня</div><br>
+
+<noindex>
+
+<div style="padding: 2px; background-color:#FFEAEA;">
+ {{vacancies}}
+</div>
+
+</noindex>
+  
+<br>
+<table width="100%" border="0" cellspacing="5" cellpadding="5">
+  <tr>
+    <td>
+Дорогие друзья! Приводим здесь один из отзывов, присланных в инфогруппу «ТУРПРОМ». Нам очень приятно, 
+что аналогичные отзывы мы получаем регулярно: <i> Хотим поблагодарить Вас за оказанное содействие в поиске персонала. 
+Спасибо Вам огромное!!! И если Вам интересно, то хочу Вам написать, что за 1.5 недели мне позвонило 9 человек и 
+4 человека прислали свои резюме. Я поняла, что Вас читают и очень многие. Еще раз спасибо Вам. 
+С уважением, Сизова Наталья, «Он-Лайн Турс». </i>
+<br>
+
+</td>
+  </tr>
+</table>
+
+{% endblock %}
+
+
+
+{% block content_right %}
+
+
+<script type="text/javascript" src="/baner/js/?type=general&area=TourBusinessBlock_3_1"></script>
+<br>
+
+<script type="text/javascript" src="/baner/js/?type=general&area=TourBusinessBlock_3_2"></script>
+
+
+
+<noindex>
+<b class="b1h"></b><b class="b2h"></b><b class="b3h"></b><b class="b4h"></b>
+    <div class="headh">
+        <h3 class="titleblock">Самые популярные новости НЕДЕЛИ</h3>
+    </div>
+    <div class="contenth" align="center">
+        <div style="text-align:center;">
+        {% for f in news_top %}
+
+            <a href="/news/{{f.id}}" rel="nofollow" class="nothing"><b>{{f.pubdate|date:"d.m.y"}}</b></a><br>
+            <a href="/news/{{f.id}}" class="nothing" rel="nofollow"><img src='{{ f.newssmallpreview.image.url }}' width="80" height="80" class="square"></a>
+
+            <h4 class="title"> {{f.title}}</h4>
+            <p>&nbsp;</p>
+            
+        {%endfor%}
+        
+        </div>
+    </div>
+<b class="b4bh"></b><b class="b3bh"></b><b class="b2bh"></b><b class="b1h"></b>
+</noindex>
+<p>&nbsp;</p>
+
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends "general/two_column_right_menu.html" %}
+
+{% block title %}Корзина: отобранные объявления по работе{% endblock %}
+
+{% block footer %}
+    {% include "general/footer_business.html" %}
+{% endblock %}
+
+{% block breadcomb %}
+<a href="/">Главная</a> / <a href="/job/">Работа в туризме</a> / [<a href="/job/vacancy/">Вакансии</a>] 
+/ [<a href="/job/cv/">Резюме</a>] / Корзина
+<p>&nbsp;</p>
+{% endblock %}
+
+{% block javascript %}
+    
+    <script>
+    function removeFromJBasket(id){
+    $.ajax({
+        type: "GET",
+        url: "/job/remove/" + id,
+        success: function(result){
+    		$('#j_' + id).remove();
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            //alert(xhr.status);
+            //alert(thrownError);
+        }
+    });
+}
+
+    function printContent()
+    {
+    var DocumentContainer = document.getElementById('printable');
+    var WindowObject = window.open('', 'PrintWindow',
+    'width=550,height=550,top=50,left=50,toolbars=no,scrollbars=yes,status=no,resizable=yes');
+    WindowObject.document.writeln(DocumentContainer.innerHTML);
+    WindowObject.document.close();
+    WindowObject.focus();
+    WindowObject.print();
+    WindowObject.close();
+    }
+
+
+    
+    </script>
+    
+{% endblock %}
+
+
+{% block content_center %}
+<div style="padding: 2px;">
+
+<div><a href="#" onClick="printContent();">Распечатать</a></div>
+
+<div id="printable">
+<table>
+ {% for entry in container %}
+
+    {% if not entry.post.is_free  %}
+     <tr id="j_{{ entry.post.id }}" bgcolor="#FFEAEA">   
+    {% else %}
+      <tr id="j_{{ entry.post.id }}" > 
+    {% endif %}
+    <td> <a href="#" onclick="removeFromJBasket('{{ entry.post.id }}')">Удал.</a> </td>
+    
+   <td> {{entry.html}}</td>
+  </tr>
+ {% endfor %}
+ </table>
+  </div>
+ 
+ 
+</div>
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "general/cabinet_adv.html" %}
+
+{% block content_center %}
+
+{{ text }}
+
+<form action="/adspages/{{page}}/post" method="POST">
+
+  {% for key, value in values.items %}
+    <input type="hidden" name="{{key}}" value="{{value}}" />
+   {% endfor %}    
+
+ <input type="submit" value="Разместить" name="new">
+</form>
+<br />
+
+<form action="/adspages/{{page}}/preview_edit" method="POST">
+
+  {% for key, value in values.items %}
+    <input type="hidden" name="{{key}}" value="{{value}}" />
+   {% endfor %}    
+<!--
+ <input type="submit" value="Вернуться к редактированию" name="new">
+-->
+<input type="button" value="Вернуться к редактированию" name="new" onclick="javascript:window.history.back();">
+</form>
+
+{% endblock %}
+
+
+{% block menu %}
+
+<a href="/login/">Личный кабинет</a> / <a href="../">Разместить объявления</a> / Объявление
+
+{% endblock %}
+
+
+{% block title %}Просмотр объявления{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "admin/base_site.html" %}
+{% block title %} Редактирование объявления {% endblock %}
+
+{% block content %}
+
+
+<div>
+ {% include 'adsman/ads_page_core.html' %} 
+</div>
+
+<div>
+    <p class="deletelink-box"><a href="../delete/" class="deletelink">Удалить</a></p>
+</div>
+
+{% endblock %}

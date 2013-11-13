@@ -1,0 +1,81 @@
+{% extends "general/two_column_right_menu.html" %}
+
+{% block title %}Работа в туризме: объявления о вакансиях и резюме{% endblock %}
+
+{% block meta_name %}
+<meta name="keywords" content="работа в туризме, вакансии туризм, менеджер по туризму">
+<meta name="description" content="Как быстро найти работу в туризме - в туроператоре, турагентстве либо в отеле? Это просто: на портале «ТУРПРОМ» каждый ищущий работу в туризме может АБСОЛЮТНО БЕСПЛАТНО разместить своё резюме! ">
+{% endblock %}
+
+{% block javascript %}
+    <script type="text/javascript" src="/site_media/js/menu_site_bus.js"></script>
+{% endblock %}
+
+{% block footer %}
+    {% include "general/footer_business.html" %}
+{% endblock %}
+
+{% block breadcomb %}
+<a href="/">Главная</a> / Работа в туризме
+<p>&nbsp;</p>
+{% endblock %}
+
+{% block content_center %}
+
+<p></p>
+
+<div id="title_block">Работа в туризме</div><br>
+
+<b class="xtop"><b class="xb1"></b><b class="xb2"></b><b class="xb3"></b><b class="xb4"></b></b>
+<div class="head_top_content" style="text-align: left;">
+
+<table width="100%" border="0" cellspacing="5" cellpadding="5">
+  <tr>
+    <td>
+      С Вашего аккаунта или с указанием такого e-mail адреса сегодня уже было размещено объявление.<br/>
+      За один день разрешается публиковать не более одного объявления.
+    </td>
+  </tr>
+</table>
+
+</div>
+<b class="b4bh"></b><b class="b3bh"></b><b class="b2bh"></b><b class="b1h"></b>
+
+{% endblock %}
+
+
+
+{% block content_right %}
+
+
+<script type="text/javascript" src="/baner/js/?type=general&area=TourBusinessBlock_3_1"></script>
+<br>
+
+<script type="text/javascript" src="/baner/js/?type=general&area=TourBusinessBlock_3_2"></script>
+
+
+
+<noindex>
+<b class="b1h"></b><b class="b2h"></b><b class="b3h"></b><b class="b4h"></b>
+    <div class="headh">
+        <h3 class="titleblock">Самые популярные новости НЕДЕЛИ</h3>
+    </div>
+    <div class="contenth" align="center">
+        <div style="text-align:center;">
+        {% for f in news_top %}
+
+            <a href="/news/{{f.id}}" rel="nofollow" class="nothing"><b>{{f.pubdate|date:"d.m.y"}}</b></a><br>
+            <a href="/news/{{f.id}}" class="nothing" rel="nofollow"><img src='{{ f.newssmallpreview.image.url }}' width="80" height="80" class="square"></a>
+
+            <h4 class="title"> {{f.title}}</h4>
+            <p>&nbsp;</p>
+
+        {%endfor%}
+
+        </div>
+    </div>
+<b class="b4bh"></b><b class="b3bh"></b><b class="b2bh"></b><b class="b1h"></b>
+</noindex>
+<p>&nbsp;</p>
+
+{% endblock %}
